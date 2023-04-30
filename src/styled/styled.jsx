@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const MainContainer = styled('div')`
@@ -63,7 +64,7 @@ export const DarkButton = styled('button')`
   margin: 10px;
   &:hover {
     background-color: #4dd467;
-    color: #0d2329;
+    /* color: #0d2329; */
     cursor: pointer;
   }
 `;
@@ -89,4 +90,13 @@ export const Text = styled('p')`
   font-size: 16px;
   font-family: 'Lato', sans-serif;
   text-align: justify;
+`;
+
+export const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: ${(props) => (props.color ? props.color : '#4dd467')};
+  &:hover {
+    color: #0d2329;
+    cursor: pointer;
+  }
 `;

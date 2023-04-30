@@ -3,10 +3,9 @@ import {
   ColumnContainer,
   Input,
   RowContainer,
-  SubTitle,
   Text,
   Title,
-  LightButton,
+  StyledLink,
 } from '../styled/styled';
 
 import logo from '../assets/Cut-Logo.png';
@@ -29,12 +28,16 @@ const Signin = () => {
           padding: '10px',
         }}
       >
-        <Title>Login to Your Account</Title>
+        <Title>Sign in to Your Account</Title>
 
         <ColumnContainer style={{ width: '80%' }}>
           <Input type="text" placeholder="E-mail" />
           <Input type="password" placeholder="Password" />
           <DarkButton type="button">Sign In</DarkButton>
+          <Text>
+            Do not have an account yet?
+            <StyledLink to={'/signup'}> Sign Up.</StyledLink>
+          </Text>
         </ColumnContainer>
       </ColumnContainer>
 
@@ -49,15 +52,8 @@ const Signin = () => {
         <img
           src={logo}
           alt="FDB Consulting Logo"
-          style={{ maxWidth: '350px', height: 'auto' }}
+          style={{ maxWidth: '80%', height: 'auto' }}
         />
-        <SubTitle color="#ffffff">Do not have an account yet?</SubTitle>
-        <Text color="#ffffff" style={{ padding: ' 0 20px' }}>
-          Sign up for free and see the outcome on your bottom line.
-        </Text>
-        <LightButton type="button" style={{ width: '50%' }}>
-          Sign Up
-        </LightButton>
       </ColumnContainer>
     </RowContainer>
   );
