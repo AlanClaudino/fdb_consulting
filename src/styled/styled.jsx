@@ -100,3 +100,13 @@ export const StyledLink = styled(Link)`
     cursor: pointer;
   }
 `;
+
+export const ErrorMessage = styled('p')`
+  font-size: 16px;
+  font-family: 'Lato', sans-serif;
+  padding: 10px;
+  border-left: 10px solid #ff3333;
+  background-color: rgb(250, 250, 250);
+  color: #0d2329;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+`;

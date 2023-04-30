@@ -6,11 +6,36 @@ import {
   Text,
   Title,
   StyledLink,
+  ErrorMessage,
 } from '../styled/styled';
 
 import logo from '../assets/Cut-Logo.png';
+import { useAuthContext } from '../context/AuthContext';
+import { useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Signin = () => {
+  const { signin, user } = useAuthContext();
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const navigate = useNavigate();
+  const [error, setError] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+    const email = emailRef.current.value;
+    const password = passwordRef.current.value;
+
+    try {
+      await signin(email, password);
+      navigate('/');
+    } catch (err) {
+      console.log(err.message);
+      setError('Password or E-mail is invalid. Please, try again.');
+    }
+  };
+
   return (
     <RowContainer
       style={{
@@ -25,20 +50,36 @@ const Signin = () => {
           flexGrow: '1',
           gap: '30px',
           borderRadius: '20px',
-          padding: '10px',
+          padding: '30px 10px',
         }}
       >
         <Title>Sign in to Your Account</Title>
+        {error && <ErrorMessage>{error}</ErrorMessage>}
 
-        <ColumnContainer style={{ width: '80%' }}>
-          <Input type="text" placeholder="E-mail" />
-          <Input type="password" placeholder="Password" />
-          <DarkButton type="button">Sign In</DarkButton>
-          <Text>
-            Do not have an account yet?
-            <StyledLink to={'/signup'}> Sign Up.</StyledLink>
-          </Text>
-        </ColumnContainer>
+        <form
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            width: '100%',
+          }}
+          onSubmit={handleSubmit}
+        >
+          <ColumnContainer style={{ width: '80%' }}>
+            <Input type="text" placeholder="E-mail" ref={emailRef} required />
+            <Input
+              type="password"
+              placeholder="Password"
+              ref={passwordRef}
+              required
+            />
+            <DarkButton type="submit">Sign In</DarkButton>
+            <Text>
+              Do not have an account yet? {user && user.email}
+              <StyledLink to={'/signup'}> Sign Up.</StyledLink>
+            </Text>
+          </ColumnContainer>
+        </form>
       </ColumnContainer>
 
       <ColumnContainer
@@ -52,7 +93,7 @@ const Signin = () => {
         <img
           src={logo}
           alt="FDB Consulting Logo"
-          style={{ maxWidth: '80%', height: 'auto' }}
+          style={{ maxWidth: 'min(400px, 100%)', height: 'auto' }}
         />
       </ColumnContainer>
     </RowContainer>

@@ -31,7 +31,7 @@ const Signup = () => {
         <img
           src={logo}
           alt="FDB Consulting Logo"
-          style={{ maxWidth: '80%', height: 'auto' }}
+          style={{ maxWidth: 'min(400px, 100%)', height: 'auto' }}
         />
       </ColumnContainer>
 
@@ -40,7 +40,7 @@ const Signup = () => {
           flexGrow: '1',
           gap: '30px',
           borderRadius: '20px',
-          padding: '10px',
+          padding: '30px 10px',
         }}
       >
         <Title>Create a New Account</Title>
