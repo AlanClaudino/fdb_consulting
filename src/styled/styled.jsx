@@ -4,7 +4,8 @@ export const MainContainer = styled('div')`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100svh;
+  min-height: 100svh;
+  padding: 10px;
 `;
 
 export const RowContainer = styled('div')`
@@ -29,9 +30,10 @@ export const Title = styled('h1')`
 
 export const SubTitle = styled('h2')`
   color: ${(props) => (props.color ? props.color : 'inherit')};
-  font-size: 28px;
+  font-size: 20px;
   font-family: 'Poppins', sans-serif;
   text-align: center;
+  font-weight: 600;
 `;
 
 export const Input = styled('input')`

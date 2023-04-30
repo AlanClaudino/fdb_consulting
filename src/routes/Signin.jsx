@@ -2,7 +2,6 @@ import {
   DarkButton,
   ColumnContainer,
   Input,
-  MainContainer,
   RowContainer,
   SubTitle,
   Text,
@@ -10,60 +9,57 @@ import {
   LightButton,
 } from '../styled/styled';
 
-import logo from '../assets/Logo.png';
+import logo from '../assets/Cut-Logo.png';
 
 const Signin = () => {
   return (
-    <MainContainer>
-      <RowContainer
+    <RowContainer
+      style={{
+        minHeight: '100svh',
+        background: 'rgb(250, 250, 250)',
+        flexWrap: 'wrap-reverse',
+        alignItems: 'stretch',
+      }}
+    >
+      <ColumnContainer
         style={{
-          boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
-          height: '70svh',
+          flexGrow: '1',
+          gap: '30px',
           borderRadius: '20px',
-          background: 'rgb(250, 250, 250)',
+          padding: '10px',
         }}
       >
-        <ColumnContainer
-          style={{
-            width: '400px',
-            height: '70svh',
-            gap: '30px',
-            borderRadius: '20px',
-          }}
-        >
-          <Title>Login to Your Account</Title>
+        <Title>Login to Your Account</Title>
 
-          <ColumnContainer style={{ width: '80%' }}>
-            <Input type="text" placeholder="E-mail" />
-            <Input type="password" placeholder="Password" />
-            <DarkButton type="button">Sign In</DarkButton>
-          </ColumnContainer>
+        <ColumnContainer style={{ width: '80%' }}>
+          <Input type="text" placeholder="E-mail" />
+          <Input type="password" placeholder="Password" />
+          <DarkButton type="button">Sign In</DarkButton>
         </ColumnContainer>
+      </ColumnContainer>
 
-        <ColumnContainer
-          style={{
-            width: '400px',
-            height: '70svh',
-            background: '#0D2329',
-            justifyContent: 'start',
-            borderRadius: '20px',
-          }}
-        >
-          <img
-            src={logo}
-            alt="FDB Consulting Logo"
-            style={{ width: '200px', height: 'auto' }}
-          />
-          <SubTitle color="#ffffff">Need an account?</SubTitle>
-          <Text color="#ffffff" style={{ padding: ' 0 20px' }}>
-            Sign up and see the outcome on your bottom line.
-          </Text>
-          <LightButton type="button" style={{ width: '50%' }}>
-            Sign Up
-          </LightButton>
-        </ColumnContainer>
-      </RowContainer>
-    </MainContainer>
+      <ColumnContainer
+        style={{
+          flexGrow: '1',
+          background: '#0D2329',
+          justifyContent: 'center',
+          padding: '10px',
+        }}
+      >
+        <img
+          src={logo}
+          alt="FDB Consulting Logo"
+          style={{ maxWidth: '350px', height: 'auto' }}
+        />
+        <SubTitle color="#ffffff">Do not have an account yet?</SubTitle>
+        <Text color="#ffffff" style={{ padding: ' 0 20px' }}>
+          Sign up for free and see the outcome on your bottom line.
+        </Text>
+        <LightButton type="button" style={{ width: '50%' }}>
+          Sign Up
+        </LightButton>
+      </ColumnContainer>
+    </RowContainer>
   );
 };
 
