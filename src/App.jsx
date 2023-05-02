@@ -4,6 +4,7 @@ import Signin from './routes/Signin';
 import Signup from './routes/Signup';
 import Home from './routes/Home';
 import ProtectedRoutes from './routes/ProtectedRoutes';
+import ResetPassword from './routes/ResetPassword';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         />
         <Route path="signin" element={<Signin />} />
         <Route path="signup" element={<Signup />} />
+        <Route path="reset-password" element={<ResetPassword />} />
       </Routes>
     </>
   );

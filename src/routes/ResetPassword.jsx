@@ -7,32 +7,30 @@ import {
   Title,
   StyledLink,
   ErrorMessage,
+  SuccessMessage,
 } from '../styled/styled';
 
 import logo from '../assets/Cut-Logo.png';
 import { useAuthContext } from '../context/AuthContext';
 import { useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
-const Signin = () => {
-  const { signin, user } = useAuthContext();
+const ResetPassword = () => {
+  const { resetPassword } = useAuthContext();
   const emailRef = useRef();
-  const passwordRef = useRef();
-  const navigate = useNavigate();
   const [error, setError] = useState('');
+  const [sentMessage, setSentMessage] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     const email = emailRef.current.value;
-    const password = passwordRef.current.value;
 
     try {
-      await signin(email, password);
-      navigate('/');
+      await resetPassword(email);
+      setSentMessage('The reset link was sent to your e-mail.');
     } catch (err) {
       console.log(err.message);
-      setError('Password or E-mail is invalid. Please, try again.');
+      setError('Failed to reset password. Please, try again.');
     }
   };
 
@@ -53,8 +51,9 @@ const Signin = () => {
           padding: '30px 10px',
         }}
       >
-        <Title>Sign in to Your Account</Title>
+        <Title>Reset your password</Title>
         {error && <ErrorMessage>{error}</ErrorMessage>}
+        {sentMessage && <SuccessMessage>{sentMessage}</SuccessMessage>}
 
         <form
           style={{
@@ -66,23 +65,14 @@ const Signin = () => {
           onSubmit={handleSubmit}
         >
           <ColumnContainer style={{ width: '80%' }}>
-            <Input type="text" placeholder="E-mail" ref={emailRef} required />
-            <Input
-              type="password"
-              placeholder="Password"
-              ref={passwordRef}
-              required
-            />
-            <Text
-              style={{ alignSelf: 'start', fontSize: '12px', padding: '10px' }}
-            >
-              <StyledLink to={'/reset-password'}>Forgot password?</StyledLink>
+            <Text style={{ padding: '10px' }}>
+              To receive a link to reset your password, please enter your email
+              address.
             </Text>
-            <DarkButton type="submit">Sign In</DarkButton>
-            <Text>
-              Do not have an account yet?{' '}
-              {user && console.log(user) && user.email}
-              <StyledLink to={'/signup'}> Sign Up.</StyledLink>
+            <Input type="text" placeholder="E-mail" ref={emailRef} required />
+            <DarkButton type="submit">Reset Password</DarkButton>
+            <Text style={{ padding: '10px' }}>
+              <StyledLink to={'/signin'}>Go back to Login</StyledLink>
             </Text>
           </ColumnContainer>
         </form>
@@ -106,4 +96,4 @@ const Signin = () => {
   );
 };
 
-export default Signin;
+export default ResetPassword;
