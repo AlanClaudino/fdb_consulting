@@ -37,7 +37,6 @@ const ResetPassword = () => {
   return (
     <RowContainer
       style={{
-        minHeight: '100svh',
         background: 'rgb(250, 250, 250)',
         flexWrap: 'wrap-reverse',
         alignItems: 'stretch',

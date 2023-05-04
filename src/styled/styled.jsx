@@ -1,18 +1,20 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-export const MainContainer = styled('div')`
+export const StyledHeader = styled('header')`
+  width: 100%;
+  background-color: #0d2329;
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  min-height: 100svh;
-  padding: 10px;
+  padding: 5px 20px;
 `;
 
 export const RowContainer = styled('div')`
   display: flex;
   align-items: center;
   justify-content: center;
+  min-height: 100svh;
 `;
 
 export const ColumnContainer = styled('div')`
@@ -64,7 +66,6 @@ export const DarkButton = styled('button')`
   margin: 10px;
   &:hover {
     background-color: #4dd467;
-    /* color: #0d2329; */
     cursor: pointer;
   }
 `;
@@ -81,6 +82,17 @@ export const LightButton = styled('button')`
   &:hover {
     color: #fff;
     background-color: #4dd467;
+    cursor: pointer;
+  }
+`;
+
+export const UnstyledButton = styled('button')`
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  &:hover {
+    color: ${(props) => (props.color ? props.color : 'none')};
     cursor: pointer;
   }
 `;
