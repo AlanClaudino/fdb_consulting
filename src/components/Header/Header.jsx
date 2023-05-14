@@ -41,7 +41,7 @@ const Header = () => {
   }, []);
 
   return (
-    <StyledHeader style={{ position: 'relative' }}>
+    <StyledHeader style={{ position: 'relative', overflow: 'visible' }}>
       <img
         src={logo}
         alt="Company Logo"

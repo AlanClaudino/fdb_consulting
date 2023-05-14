@@ -5,7 +5,8 @@ export const RowContainer = styled('div')`
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100svh;
+  height: ${(props) => (props.height ? props.height : 'auto')};
+  background: ${(props) => (props.background ? props.background : 'inherit')};
 `;
 
 export const ColumnContainer = styled('div')`
@@ -13,6 +14,8 @@ export const ColumnContainer = styled('div')`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  height: ${(props) => (props.height ? props.height : 'auto')};
+  background: ${(props) => (props.background ? props.background : 'inherit')};
 `;
 
 export const Title = styled('h1')`
@@ -31,18 +34,23 @@ export const SubTitle = styled('h2')`
 `;
 
 export const Input = styled('input')`
-  background: rgb(235, 235, 235);
-  box-shadow: ${(props) => (props.shadow ? props.shadow : 'none')};
+  color: #0d2329;
+  background: none;
   padding: 8px 16px;
   font-size: 16px;
   font-family: 'Lato', sans-serif;
-  border-radius: 24px;
-  border: ${(props) => (props.border ? props.border : 'none')};
+  border: none;
+  border-bottom: 2px solid #0d2329;
   margin: 10px;
   width: 100%;
   &:focus {
-    border: none;
-    box-shadow: 0 0 0 2px #0d2329;
+    border-bottom: 2px solid #4dd467;
+  }
+  &:focus-visible {
+    outline: none;
+  }
+  &::placeholder {
+    color: #0d2329;
   }
 `;
 
@@ -54,7 +62,7 @@ export const DarkButton = styled('button')`
   font-size: 16px;
   padding: 8px;
   border: none;
-  margin: 10px;
+  margin: 30px;
   &:hover {
     background-color: #4dd467;
     cursor: pointer;

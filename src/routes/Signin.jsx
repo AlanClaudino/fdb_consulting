@@ -1,18 +1,9 @@
-import {
-  DarkButton,
-  ColumnContainer,
-  Input,
-  RowContainer,
-  Text,
-  Title,
-  StyledLink,
-  ErrorMessage,
-} from '../styled/styled';
-
-import logo from '../assets/Cut-Logo.png';
-import { useAuthContext } from '../context/AuthContext';
 import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuthContext } from '../context/AuthContext';
+
+import { ColumnContainer } from '../styled/styled';
+import SignInForm from '../components/SignInForm/SignInForm';
 
 const Signin = () => {
   const { signin, user } = useAuthContext();
@@ -37,71 +28,17 @@ const Signin = () => {
   };
 
   return (
-    <RowContainer
-      style={{
-        background: 'rgb(250, 250, 250)',
-        flexWrap: 'wrap-reverse',
-        alignItems: 'stretch',
-      }}
-    >
-      <ColumnContainer
-        style={{
-          flexGrow: '1',
-          gap: '30px',
-          borderRadius: '20px',
-          padding: '30px 10px',
-        }}
-      >
-        <Title>Sign in to Your Account</Title>
-        {error && <ErrorMessage>{error}</ErrorMessage>}
-
-        <form
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            width: '100%',
-          }}
-          onSubmit={handleSubmit}
-        >
-          <ColumnContainer style={{ width: '80%' }}>
-            <Input type="text" placeholder="E-mail" ref={emailRef} required />
-            <Input
-              type="password"
-              placeholder="Password"
-              ref={passwordRef}
-              required
-            />
-            <Text
-              style={{ alignSelf: 'start', fontSize: '12px', padding: '10px' }}
-            >
-              <StyledLink to={'/reset-password'}>Forgot password?</StyledLink>
-            </Text>
-            <DarkButton type="submit">Sign In</DarkButton>
-            <Text>
-              Do not have an account yet?{' '}
-              {user && console.log(user) && user.email}
-              <StyledLink to={'/signup'}> Sign Up.</StyledLink>
-            </Text>
-          </ColumnContainer>
-        </form>
-      </ColumnContainer>
-
-      <ColumnContainer
-        style={{
-          flexGrow: '1',
-          background: '#0D2329',
-          justifyContent: 'center',
-          padding: '10px',
-        }}
-      >
-        <img
-          src={logo}
-          alt="FDB Consulting Logo"
-          style={{ maxWidth: 'min(400px, 100%)', height: 'auto' }}
+    <div className="background">
+      <ColumnContainer height="100svh">
+        <SignInForm
+          handleSubmit={handleSubmit}
+          user={user}
+          emailRef={emailRef}
+          passwordRef={passwordRef}
+          error={error}
         />
       </ColumnContainer>
-    </RowContainer>
+    </div>
   );
 };
 

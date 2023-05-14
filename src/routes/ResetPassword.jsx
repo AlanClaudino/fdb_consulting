@@ -1,18 +1,8 @@
-import {
-  DarkButton,
-  ColumnContainer,
-  Input,
-  RowContainer,
-  Text,
-  Title,
-  StyledLink,
-  ErrorMessage,
-  SuccessMessage,
-} from '../styled/styled';
-
-import logo from '../assets/Cut-Logo.png';
-import { useAuthContext } from '../context/AuthContext';
 import { useRef, useState } from 'react';
+import { useAuthContext } from '../context/AuthContext';
+
+import ResetPasswordForm from '../components/ResetPasswordForm/ResetPasswordForm';
+import { ColumnContainer } from '../styled/styled';
 
 const ResetPassword = () => {
   const { resetPassword } = useAuthContext();
@@ -35,63 +25,16 @@ const ResetPassword = () => {
   };
 
   return (
-    <RowContainer
-      style={{
-        background: 'rgb(250, 250, 250)',
-        flexWrap: 'wrap-reverse',
-        alignItems: 'stretch',
-      }}
-    >
-      <ColumnContainer
-        style={{
-          flexGrow: '1',
-          gap: '30px',
-          borderRadius: '20px',
-          padding: '30px 10px',
-        }}
-      >
-        <Title>Reset your password</Title>
-        {error && <ErrorMessage>{error}</ErrorMessage>}
-        {sentMessage && <SuccessMessage>{sentMessage}</SuccessMessage>}
-
-        <form
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            width: '100%',
-          }}
-          onSubmit={handleSubmit}
-        >
-          <ColumnContainer style={{ width: '80%' }}>
-            <Text style={{ padding: '10px' }}>
-              To receive a link to reset your password, please enter your email
-              address.
-            </Text>
-            <Input type="text" placeholder="E-mail" ref={emailRef} required />
-            <DarkButton type="submit">Reset Password</DarkButton>
-            <Text style={{ padding: '10px' }}>
-              <StyledLink to={'/signin'}>Go back to Login</StyledLink>
-            </Text>
-          </ColumnContainer>
-        </form>
-      </ColumnContainer>
-
-      <ColumnContainer
-        style={{
-          flexGrow: '1',
-          background: '#0D2329',
-          justifyContent: 'center',
-          padding: '10px',
-        }}
-      >
-        <img
-          src={logo}
-          alt="FDB Consulting Logo"
-          style={{ maxWidth: 'min(400px, 100%)', height: 'auto' }}
+    <div className="background">
+      <ColumnContainer height="100svh">
+        <ResetPasswordForm
+          handleSubmit={handleSubmit}
+          emailRef={emailRef}
+          error={error}
+          sentMessage={sentMessage}
         />
       </ColumnContainer>
-    </RowContainer>
+    </div>
   );
 };
 
