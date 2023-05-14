@@ -1,15 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-export const StyledHeader = styled('header')`
-  width: 100%;
-  background-color: #0d2329;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 5px 20px;
-`;
-
 export const RowContainer = styled('div')`
   display: flex;
   align-items: center;
@@ -82,17 +73,6 @@ export const LightButton = styled('button')`
   &:hover {
     color: #fff;
     background-color: #4dd467;
-    cursor: pointer;
-  }
-`;
-
-export const UnstyledButton = styled('button')`
-  background: none;
-  border: none;
-  padding: 0;
-  margin: 0;
-  &:hover {
-    color: ${(props) => (props.color ? props.color : 'none')};
     cursor: pointer;
   }
 `;

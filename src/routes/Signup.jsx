@@ -70,7 +70,6 @@ const Signup = () => {
         style={{
           flexGrow: '1',
           gap: '30px',
-          borderRadius: '20px',
           padding: '30px 10px',
         }}
       >
