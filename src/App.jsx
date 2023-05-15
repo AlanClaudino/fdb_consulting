@@ -6,6 +6,7 @@ import ProtectedRoutes from './routes/ProtectedRoutes';
 import ResetPassword from './routes/ResetPassword';
 import Dashboard from './routes/Dashboard';
 import Home from './routes/Home';
+import Profile from './routes/Profile';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/" element={<ProtectedRoutes />}>
           <Route path="/" element={<Home />}>
             <Route index element={<Dashboard />} />
+            <Route path="/profile" element={<Profile />} />
           </Route>
         </Route>
 

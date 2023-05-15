@@ -1,5 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import Header from '../components/Header/Header.jsx';
+import Sidebar from '../components/Sidebar/Sidebar.jsx';
 
 const Home = () => {
   return (
@@ -11,8 +12,16 @@ const Home = () => {
       }}
     >
       <Header />
-      <div>
-        <Outlet />
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: '250px auto',
+        }}
+      >
+        <Sidebar />
+        <>
+          <Outlet />
+        </>
       </div>
     </div>
   );

@@ -21,7 +21,7 @@ export const StyledHeader = styled('header')`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 5px 20px;
+  padding: 5px 20px 5px 10px;
 `;
 
 export const MenuButton = styled('button')`
@@ -42,4 +42,10 @@ export const MenuButton = styled('button')`
 export const UserIcon = styled(User)`
   border-radius: 50%;
   border: 2px solid white;
+`;
+
+export const LogoText = styled('p')`
+  font-family: 'DM Sans', sans-serif;
+  font-size: 21px;
+  color: white;
 `;
