@@ -5,50 +5,12 @@ import farm1 from '../../assets/farmer1.jpg';
 import farm2 from '../../assets/farmer2.jpg';
 import farm3 from '../../assets/farmer3.jpg';
 import farm4 from '../../assets/farmer4.jpg';
-import { useRef, useState } from 'react';
-import { useAuthContext } from '../../context/AuthContext';
 
-const ProfileForm = () => {
-  const [active, setActive] = useState();
-  const [error, setError] = useState();
-  const [message, setMessage] = useState();
-  const userNameRef = useRef();
-  const { update } = useAuthContext();
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const userName = userNameRef.current.value;
-    const avatar = active;
-
-    const userInfo = {};
-
-    if (userName) {
-      userInfo['displayName'] = userName;
-    }
-
-    if (avatar) {
-      userInfo['photoURL'] = avatar;
-    }
-
-    try {
-      await update(userInfo);
-      setMessage('Your profile has been updated.');
-    } catch (err) {
-      console.log(err.message);
-      setError('Password or E-mail is invalid. Please, try again.');
-    }
-  };
-
-  const handleActive = (e) => {
-    setActive(e.target.value);
-  };
-
+// eslint-disable-next-line react/prop-types
+const ProfileForm = ({ handleSubmit, userNameRef, active, handleActive }) => {
   return (
     <form
-      style={{
-        width: '100%',
-        height: '100%',
-      }}
+      style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}
       onSubmit={handleSubmit}
     >
       <FormSection>
@@ -63,12 +25,12 @@ const ProfileForm = () => {
         <Text style={{ padding: '0 20px' }}>Select your avartar:</Text>
         <FormSection justify="space-between" style={{ height: '100%' }}>
           <RadioContainer
-            shadow={active == farm1 ? 'rgba(77, 212, 104) 0 0 0 2px' : ''}
+            shadow={active == 'farmer1' ? 'rgba(77, 212, 104) 0 0 0 2px' : ''}
           >
             <RadioInput
               type="radio"
               name="avatar"
-              value={farm1}
+              value={'farmer1'}
               onChange={handleActive}
             />
             <img
@@ -78,12 +40,12 @@ const ProfileForm = () => {
             />
           </RadioContainer>
           <RadioContainer
-            shadow={active == farm2 ? 'rgba(77, 212, 104) 0 0 0 2px' : ''}
+            shadow={active == 'farmer2' ? 'rgba(77, 212, 104) 0 0 0 2px' : ''}
           >
             <RadioInput
               type="radio"
               name="avatar"
-              value={farm2}
+              value={'farmer2'}
               onChange={handleActive}
             />
             <img
@@ -93,12 +55,12 @@ const ProfileForm = () => {
             />
           </RadioContainer>
           <RadioContainer
-            shadow={active == farm3 ? 'rgba(77, 212, 104) 0 0 0 2px' : ''}
+            shadow={active == 'farmer3' ? 'rgba(77, 212, 104) 0 0 0 2px' : ''}
           >
             <RadioInput
               type="radio"
               name="avatar"
-              value={farm3}
+              value={'farmer3'}
               onChange={handleActive}
             />
             <img
@@ -108,12 +70,12 @@ const ProfileForm = () => {
             />
           </RadioContainer>
           <RadioContainer
-            shadow={active == farm4 ? 'rgba(77, 212, 104) 0 0 0 2px' : ''}
+            shadow={active == 'farmer4' ? 'rgba(77, 212, 104) 0 0 0 2px' : ''}
           >
             <RadioInput
               type="radio"
               name="avatar"
-              value={farm4}
+              value={'farmer4'}
               onChange={handleActive}
             />
             <img
@@ -129,7 +91,6 @@ const ProfileForm = () => {
           width: '100%',
           display: 'flex',
           justifyContent: 'center',
-          margin: '10px',
         }}
       >
         <DarkButton style={{ maxWidth: '300px', margin: '10px' }} type="submit">

@@ -11,12 +11,24 @@ import { useEffect, useRef, useState } from 'react';
 import { useAuthContext } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
+import farmer1 from '../../assets/farmer1.jpg';
+import farmer2 from '../../assets/farmer2.jpg';
+import farmer3 from '../../assets/farmer3.jpg';
+import farmer4 from '../../assets/farmer4.jpg';
+
 const Header = () => {
   const { signout, user } = useAuthContext();
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   const [error, setError] = useState('');
   const menuRef = useRef();
+
+  const avatar = {
+    farmer1,
+    farmer2,
+    farmer3,
+    farmer4,
+  };
 
   const handleLogOut = async (e) => {
     e.preventDefault();
@@ -71,7 +83,14 @@ const Header = () => {
       </div>
       <div ref={menuRef}>
         <MenuButton onClick={() => setIsOpen(!isOpen)}>
-          <UserIcon color="white" size={30} />
+          {user.photoURL ? (
+            <img
+              src={avatar[user.photoURL]}
+              style={{ width: '45px', height: 'auto', borderRadius: '50%' }}
+            />
+          ) : (
+            <UserIcon color="white" size={30} />
+          )}
           <Text style={{ padding: '10px 20px 10px 10px' }} color="white">
             {user.displayName || 'New user'}
           </Text>

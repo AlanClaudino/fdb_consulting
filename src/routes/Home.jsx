@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import Header from '../components/Header/Header.jsx';
 import Sidebar from '../components/Sidebar/Sidebar.jsx';
+import { RowContainer } from '../styled/styled.jsx';
 
 const Home = () => {
   return (
@@ -19,9 +20,9 @@ const Home = () => {
         }}
       >
         <Sidebar />
-        <>
+        <RowContainer style={{ padding: '15px', overflow: 'auto' }}>
           <Outlet />
-        </>
+        </RowContainer>
       </div>
     </div>
   );
