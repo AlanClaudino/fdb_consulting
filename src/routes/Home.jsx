@@ -8,7 +8,7 @@ const Home = () => {
     <div
       style={{
         display: 'grid',
-        gridTemplateRows: '60px auto',
+        gridTemplateRows: '70px auto',
         minHeight: '100svh',
       }}
     >

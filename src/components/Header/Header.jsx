@@ -44,10 +44,12 @@ const Header = () => {
 
   const handleNavigatekHome = () => {
     navigate('/');
+    setIsOpen(false);
   };
 
   const handleProfile = () => {
     navigate('/profile');
+    setIsOpen(false);
   };
   useEffect(() => {
     const handleClick = (e) => {
@@ -76,10 +78,10 @@ const Header = () => {
       >
         <img
           src={logo}
-          alt="Company Logo"
+          alt='Company Logo'
           style={{ height: '100%', width: 'auto' }}
         />
-        <LogoText color="white">FDB Consulting</LogoText>
+        <LogoText color='white'>FDB Consulting</LogoText>
       </div>
       <div ref={menuRef}>
         <MenuButton onClick={() => setIsOpen(!isOpen)}>
@@ -89,20 +91,20 @@ const Header = () => {
               style={{ width: '45px', height: 'auto', borderRadius: '50%' }}
             />
           ) : (
-            <UserIcon color="white" size={30} />
+            <UserIcon color='white' size={30} />
           )}
-          <Text style={{ padding: '10px 20px 10px 10px' }} color="white">
+          <Text style={{ padding: '10px 20px 10px 10px' }} color='white'>
             {user.displayName || 'New user'}
           </Text>
         </MenuButton>
         {isOpen && (
           <UserMenu>
             {error && <ErrorMessage>{error}</ErrorMessage>}
-            <MenuButton color="#4dd467" onClick={handleProfile}>
+            <MenuButton color='#4dd467' onClick={handleProfile}>
               <Text style={{ padding: '10px 20px' }}>Profile Settings</Text>
             </MenuButton>
             <hr style={{ width: '90%', margin: '0 auto' }} />
-            <MenuButton color="#4dd467" onClick={handleLogOut}>
+            <MenuButton color='#4dd467' onClick={handleLogOut}>
               <Text style={{ padding: '10px 20px' }}>Logout</Text>
             </MenuButton>
           </UserMenu>

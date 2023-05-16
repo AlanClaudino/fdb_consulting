@@ -50,7 +50,7 @@ const Profile = () => {
         display: 'flex',
         flexDirection: 'column',
         padding: '10px',
-        gap: '10px',
+        gap: '15px',
         alignItems: 'stretch',
         justifyContent: 'start',
         boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px',

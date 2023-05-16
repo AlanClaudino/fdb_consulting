@@ -28,15 +28,15 @@ const Signup = () => {
 
     try {
       await signup(email, password);
-      navigate('/');
+      navigate('/profile');
     } catch (err) {
       console.log(err.message);
       setError('Failed to create account. Please, try again.');
     }
   };
   return (
-    <div className="background">
-      <ColumnContainer height="100svh">
+    <div className='background'>
+      <ColumnContainer height='100svh'>
         <SignUpForm
           handleSubmit={handleSubmit}
           user={user}

@@ -15,27 +15,27 @@ const ProfileForm = ({ handleSubmit, userNameRef, active, handleActive }) => {
     >
       <FormSection>
         <Input
-          type="text"
-          placeholder="Type your user name..."
+          type='text'
+          placeholder='Type your user name...'
           ref={userNameRef}
           style={{ maxWidth: '500px', margin: '0' }}
         />
       </FormSection>
       <div>
         <Text style={{ padding: '0 20px' }}>Select your avartar:</Text>
-        <FormSection justify="space-between" style={{ height: '100%' }}>
+        <FormSection justify='space-between'>
           <RadioContainer
             shadow={active == 'farmer1' ? 'rgba(77, 212, 104) 0 0 0 2px' : ''}
           >
             <RadioInput
-              type="radio"
-              name="avatar"
+              type='radio'
+              name='avatar'
               value={'farmer1'}
               onChange={handleActive}
             />
             <img
               src={farm1}
-              alt="male farmer holding a mobile phone"
+              alt='male farmer holding a mobile phone'
               style={{ maxWidth: '100%', height: 'auto' }}
             />
           </RadioContainer>
@@ -43,29 +43,33 @@ const ProfileForm = ({ handleSubmit, userNameRef, active, handleActive }) => {
             shadow={active == 'farmer2' ? 'rgba(77, 212, 104) 0 0 0 2px' : ''}
           >
             <RadioInput
-              type="radio"
-              name="avatar"
+              type='radio'
+              name='avatar'
               value={'farmer2'}
               onChange={handleActive}
             />
             <img
               src={farm2}
-              alt="male farmer holding a mobile phone"
-              style={{ maxWidth: 'min(200px, 100%)', height: 'auto' }}
+              alt='male farmer holding a mobile phone'
+              style={{
+                maxWidth: 'min(200px, 100%)',
+                height: 'auto',
+                margin: '5px 0px',
+              }}
             />
           </RadioContainer>
           <RadioContainer
             shadow={active == 'farmer3' ? 'rgba(77, 212, 104) 0 0 0 2px' : ''}
           >
             <RadioInput
-              type="radio"
-              name="avatar"
+              type='radio'
+              name='avatar'
               value={'farmer3'}
               onChange={handleActive}
             />
             <img
               src={farm3}
-              alt="male farmer holding a mobile phone"
+              alt='male farmer holding a mobile phone'
               style={{ maxWidth: 'min(200px, 100%)', height: 'auto' }}
             />
           </RadioContainer>
@@ -73,14 +77,14 @@ const ProfileForm = ({ handleSubmit, userNameRef, active, handleActive }) => {
             shadow={active == 'farmer4' ? 'rgba(77, 212, 104) 0 0 0 2px' : ''}
           >
             <RadioInput
-              type="radio"
-              name="avatar"
+              type='radio'
+              name='avatar'
               value={'farmer4'}
               onChange={handleActive}
             />
             <img
               src={farm4}
-              alt="male farmer holding a mobile phone"
+              alt='male farmer holding a mobile phone'
               style={{ maxWidth: 'min(200px, 100%)', height: 'auto' }}
             />
           </RadioContainer>
@@ -93,7 +97,7 @@ const ProfileForm = ({ handleSubmit, userNameRef, active, handleActive }) => {
           justifyContent: 'center',
         }}
       >
-        <DarkButton style={{ maxWidth: '300px', margin: '10px' }} type="submit">
+        <DarkButton style={{ maxWidth: '300px', margin: '10px' }} type='submit'>
           Update Profile
         </DarkButton>
       </div>
