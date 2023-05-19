@@ -13,7 +13,7 @@ export const RadioContainer = styled('div')`
   max-width: 200px;
   max-height: 200px;
   box-shadow: ${(props) =>
-    props.shadow ? props.shadow : 'rgba(0, 0, 0, 0.24) 0px 4px 8px'};
+    props.shadow ? props.shadow : 'rgba(0, 0, 0, 0.24) 0px 3px 8px'};
 `;
 
 export const RadioInput = styled('input')`
