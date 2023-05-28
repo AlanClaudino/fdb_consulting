@@ -8,6 +8,7 @@ import Dashboard from "./routes/Dashboard";
 import Home from "./routes/Home";
 import Profile from "./routes/Profile";
 import Farm from "./routes/Farm";
+import Project from "./routes/Project";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Routes>
         <Route path="/" element={<ProtectedRoutes />}>
           <Route path="/" element={<Home />}>
+            <Route index element={<Project />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/farm" element={<Farm />}>
               <Route index element={<Dashboard />} />
