@@ -1,20 +1,20 @@
-import { useRef, useState } from 'react';
-import ProfileForm from '../components/ProfileForm/ProfileForm';
+import {useRef, useState} from "react";
+import ProfileForm from "../components/ProfileForm/ProfileForm";
 import {
   Title,
   ColumnContainer,
   SuccessMessage,
   StyledLink,
   ErrorMessage,
-} from '../styled/styled';
-import { useAuthContext } from '../context/AuthContext';
+} from "../components/styled/styled";
+import {useAuthContext} from "../context/AuthContext";
 
 const Profile = () => {
   const [active, setActive] = useState();
   const [error, setError] = useState(false);
   const [message, setMessage] = useState(false);
   const userNameRef = useRef();
-  const { update } = useAuthContext();
+  const {update} = useAuthContext();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,11 +24,11 @@ const Profile = () => {
     const userInfo = {};
 
     if (userName) {
-      userInfo['displayName'] = userName;
+      userInfo["displayName"] = userName;
     }
 
     if (avatar) {
-      userInfo['photoURL'] = avatar;
+      userInfo["photoURL"] = avatar;
     }
 
     try {
@@ -45,38 +45,42 @@ const Profile = () => {
   };
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        padding: '10px',
-        gap: '15px',
-        alignItems: 'stretch',
-        justifyContent: 'start',
-        boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
-        borderRadius: '20px',
-        height: '100%',
-        width: '100%',
-      }}
-    >
-      <ColumnContainer>
-        <Title>Profile Information</Title>
-        {message && (
-          <SuccessMessage>
-            Success: Your profile has been updated. Go back to your{' '}
-            <StyledLink to={'/'}>Dashboard</StyledLink>.
-          </SuccessMessage>
-        )}
-        {error && (
-          <ErrorMessage>An error has ocurred. Please, try again.</ErrorMessage>
-        )}
-        <ProfileForm
-          handleSubmit={handleSubmit}
-          userNameRef={userNameRef}
-          active={active}
-          handleActive={handleActive}
-        />
-      </ColumnContainer>
+    <div style={{padding: "15px"}}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          padding: "10px",
+          gap: "15px",
+          alignItems: "stretch",
+          justifyContent: "start",
+          boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
+          borderRadius: "20px",
+          height: "100%",
+          width: "100%",
+        }}
+      >
+        <ColumnContainer>
+          <Title>Profile Information</Title>
+          {message && (
+            <SuccessMessage>
+              Success: Your profile has been updated. Go back to your{" "}
+              <StyledLink to={"/"}>Dashboard</StyledLink>.
+            </SuccessMessage>
+          )}
+          {error && (
+            <ErrorMessage>
+              An error has ocurred. Please, try again.
+            </ErrorMessage>
+          )}
+          <ProfileForm
+            handleSubmit={handleSubmit}
+            userNameRef={userNameRef}
+            active={active}
+            handleActive={handleActive}
+          />
+        </ColumnContainer>
+      </div>
     </div>
   );
 };

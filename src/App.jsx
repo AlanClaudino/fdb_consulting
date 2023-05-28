@@ -1,12 +1,13 @@
-import './App.css';
-import { Route, Routes } from 'react-router-dom';
-import Signin from './routes/Signin';
-import Signup from './routes/Signup';
-import ProtectedRoutes from './routes/ProtectedRoutes';
-import ResetPassword from './routes/ResetPassword';
-import Dashboard from './routes/Dashboard';
-import Home from './routes/Home';
-import Profile from './routes/Profile';
+import "./App.css";
+import {Route, Routes} from "react-router-dom";
+import Signin from "./routes/Signin";
+import Signup from "./routes/Signup";
+import ProtectedRoutes from "./routes/ProtectedRoutes";
+import ResetPassword from "./routes/ResetPassword";
+import Dashboard from "./routes/Dashboard";
+import Home from "./routes/Home";
+import Profile from "./routes/Profile";
+import Farm from "./routes/Farm";
 
 function App() {
   return (
@@ -14,8 +15,10 @@ function App() {
       <Routes>
         <Route path="/" element={<ProtectedRoutes />}>
           <Route path="/" element={<Home />}>
-            <Route index element={<Dashboard />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/farm" element={<Farm />}>
+              <Route index element={<Dashboard />} />
+            </Route>
           </Route>
         </Route>
 
