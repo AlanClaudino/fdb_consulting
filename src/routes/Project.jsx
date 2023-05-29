@@ -5,7 +5,7 @@ const Project = () => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate("Farm");
+    navigate("register-farm");
   };
   return <ProjectRegister handleClick={handleClick} />;
 };
