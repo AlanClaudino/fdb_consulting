@@ -4,9 +4,13 @@ export const Background = styled("div")`
   height: 100%;
   width: 100vw;
   background: linear-gradient(183deg, #0d2d33 50%, #f4f4f4 50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const Container = styled("div")`
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
   align-items: stretch;
