@@ -1,9 +1,9 @@
-import {db} from "../Firebase";
+import { db } from '../Firebase';
 
-import {collection, getDocs} from "firebase/firestore";
+import { collection, getDocs } from 'firebase/firestore';
 
-const teste = await getDocs(collection(db, "Testes"));
+const collectionRef = collection(db, 'Testes');
 
-teste.forEach((item) => {
-  console.log(item);
-});
+export const teste = async () => {
+  return await getDocs(collectionRef);
+};

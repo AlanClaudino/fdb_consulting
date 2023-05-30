@@ -1,12 +1,14 @@
-import styled from "styled-components";
+import styled from 'styled-components';
+import background from '../../assets/farmBackground.svg';
 
-export const Background = styled("div")`
+export const Background = styled('div')`
   height: 100%;
   width: 100vw;
-  background: linear-gradient(183deg, #0d2d33 50%, #f4f4f4 50%);
+  background: url(${background}) center;
+  background-size: cover;
 `;
 
-export const Container = styled("div")`
+export const Container = styled('div')`
   max-width: 980px;
   margin: 0 auto;
   height: 100%;
@@ -16,26 +18,26 @@ export const Container = styled("div")`
   justify-content: center;
 `;
 
-export const ProjectContainer = styled("div")`
+export const ProjectContainer = styled('div')`
   display: flex;
   justify-content: start;
   flex-wrap: wrap;
   padding: 10px;
 `;
 
-export const TextHero = styled("p")`
+export const TextHero = styled('p')`
   color: white;
   font-size: 40px;
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
 `;
 
-export const Text = styled("p")`
+export const Text = styled('p')`
   color: #0d2d33;
   font-size: 30px;
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
 `;
 
-export const ProjectButton = styled("div")`
+export const ProjectButton = styled('div')`
   background-color: #f4f4f4;
   color: #0d2d33;
   display: flex;
