@@ -15,7 +15,6 @@ import logo from "../../assets/Cut-Logo.png";
 
 const SignUpForm = ({
   handleSubmit,
-  user,
   emailRef,
   passwordRef,
   confirmpasswordRef,
@@ -53,7 +52,7 @@ const SignUpForm = ({
           </Form>
           <LinksContainer>
             <LinkText>
-              Already have an account? {user && user.email}
+              Already have an account?
               <StyledLink to={"/signin"}> Sign In.</StyledLink>
             </LinkText>
           </LinksContainer>

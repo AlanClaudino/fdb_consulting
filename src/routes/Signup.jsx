@@ -5,7 +5,7 @@ import {useAuthContext} from "../context/AuthContext";
 import SignUpForm from "../components/SignUpForm/SignUpForm";
 
 const Signup = () => {
-  const {signup, user} = useAuthContext();
+  const {signup} = useAuthContext();
   const emailRef = useRef();
   const passwordRef = useRef();
   const confirmpasswordRef = useRef();
@@ -46,7 +46,6 @@ const Signup = () => {
     <div className="background" style={style}>
       <SignUpForm
         handleSubmit={handleSubmit}
-        user={user}
         emailRef={emailRef}
         passwordRef={passwordRef}
         confirmpasswordRef={confirmpasswordRef}
