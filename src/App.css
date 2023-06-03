@@ -2,10 +2,32 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  overflow: auto;
 }
 
 .background {
   background: url(./assets/background.jpg) center;
   background-size: cover;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f4f4f4;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

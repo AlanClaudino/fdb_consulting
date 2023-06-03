@@ -45,7 +45,7 @@ const Profile = () => {
   };
 
   return (
-    <div style={{padding: "15px"}}>
+    <div style={{padding: "15px", overflow: "auto"}}>
       <div
         style={{
           display: "flex",

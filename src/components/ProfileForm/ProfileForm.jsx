@@ -23,7 +23,7 @@ const ProfileForm = ({handleSubmit, userNameRef, active, handleActive}) => {
       </FormSection>
       <div>
         <Text style={{padding: "0 20px"}}>Select your avartar:</Text>
-        <FormSection justify="space-between">
+        <FormSection justify="center">
           <RadioContainer
             shadow={active == "farmer1" ? "rgba(77, 212, 104) 0 0 0 2px" : ""}
           >
@@ -36,7 +36,7 @@ const ProfileForm = ({handleSubmit, userNameRef, active, handleActive}) => {
             <img
               src={farm1}
               alt="male farmer holding a mobile phone"
-              style={{maxWidth: "100%", height: "auto"}}
+              style={{maxWidth: "min(200px, 100%)", height: "auto"}}
             />
           </RadioContainer>
           <RadioContainer
@@ -51,11 +51,7 @@ const ProfileForm = ({handleSubmit, userNameRef, active, handleActive}) => {
             <img
               src={farm2}
               alt="male farmer holding a mobile phone"
-              style={{
-                maxWidth: "min(200px, 100%)",
-                height: "auto",
-                margin: "5px 0px",
-              }}
+              style={{maxWidth: "min(200px, 100%)", height: "auto"}}
             />
           </RadioContainer>
           <RadioContainer

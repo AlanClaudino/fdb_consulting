@@ -1,5 +1,5 @@
-import { createContext, useContext, useEffect, useState } from 'react';
-import { auth } from '../Firebase';
+import {createContext, useContext, useEffect, useState} from "react";
+import {auth} from "../Firebase";
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
@@ -7,7 +7,8 @@ import {
   signOut,
   sendPasswordResetEmail,
   updateProfile,
-} from 'firebase/auth';
+} from "firebase/auth";
+import DatabaseContext from "./dbContext";
 
 const UserContext = createContext({});
 
@@ -17,7 +18,7 @@ export const useAuthContext = () => {
 };
 
 // eslint-disable-next-line react/prop-types
-const AuthContext = ({ children }) => {
+const AuthContext = ({children}) => {
   const [user, setUser] = useState();
   const [isLoading, setIsLoading] = useState(true);
 
@@ -53,9 +54,9 @@ const AuthContext = ({ children }) => {
 
   return (
     <UserContext.Provider
-      value={{ user, signin, signout, signup, resetPassword, update }}
+      value={{user, signin, signout, signup, resetPassword, update}}
     >
-      {!isLoading && children}
+      <DatabaseContext>{!isLoading && children}</DatabaseContext>
     </UserContext.Provider>
   );
 };

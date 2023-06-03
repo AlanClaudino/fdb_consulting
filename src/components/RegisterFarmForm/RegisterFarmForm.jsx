@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import {ErrorMessage} from "../styled/styled";
 import {
   Background,
   ClearButton,
@@ -11,8 +12,6 @@ import {
   Title,
 } from "./styled";
 
-import {teste} from "../../context/dbContext";
-
 const RegisterFarmForm = ({
   handleSubmit,
   idNumberRef,
@@ -20,21 +19,13 @@ const RegisterFarmForm = ({
   registrationRef,
   countyRef,
   stateRef,
+  error,
 }) => {
-  const handleTeste = async () => {
-    const res = await teste();
-    let arr = [];
-    res.docs.forEach((doc) => {
-      arr.push({...doc.data(), id: doc.id});
-    });
-
-    console.log(arr);
-  };
-
   return (
     <Background>
       <Container>
         <Title>Farm Details</Title>
+        {error && <ErrorMessage>{error}</ErrorMessage>}
         <Form onSubmit={handleSubmit}>
           <FormSection>
             <Label htmlFor="idNumber">Farm ID</Label>
@@ -42,6 +33,7 @@ const RegisterFarmForm = ({
               type="Text"
               placeholder="Farm identification number"
               id="idNumber"
+              required
               ref={idNumberRef}
             />
           </FormSection>
@@ -51,6 +43,7 @@ const RegisterFarmForm = ({
               type="Text"
               placeholder="Farm display / description"
               id="farmName"
+              required
               ref={farmNameRef}
             />
           </FormSection>
@@ -60,6 +53,7 @@ const RegisterFarmForm = ({
               type="Text"
               placeholder="Business Registration Number"
               id="registration"
+              required
               ref={registrationRef}
             />
           </FormSection>
@@ -69,6 +63,7 @@ const RegisterFarmForm = ({
               type="Text"
               placeholder="County name"
               id="county"
+              required
               ref={countyRef}
             />
           </FormSection>
@@ -81,7 +76,6 @@ const RegisterFarmForm = ({
             <ClearButton>Clear</ClearButton>
           </FormSection>
         </Form>
-        <button onClick={handleTeste}>Teste</button>
       </Container>
     </Background>
   );
