@@ -27,7 +27,7 @@ export const Title = styled("h1")`
 
 export const SubTitle = styled("h2")`
   color: ${(props) => (props.color ? props.color : "inherit")};
-  font-size: 20px;
+  font-size: 24px;
   font-family: "Poppins", sans-serif;
   text-align: center;
   font-weight: 600;

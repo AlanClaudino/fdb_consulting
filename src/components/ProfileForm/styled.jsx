@@ -15,6 +15,9 @@ export const RadioContainer = styled("div")`
   max-height: 200px;
   box-shadow: ${(props) =>
     props.shadow ? props.shadow : "rgba(0, 0, 0, 0.24) 0px 3px 8px"};
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const RadioInput = styled("input")`
@@ -23,4 +26,7 @@ export const RadioInput = styled("input")`
   height: 100%;
   z-index: 2;
   opacity: 0;
+  &:hover {
+    cursor: pointer;
+  }
 `;

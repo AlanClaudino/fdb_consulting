@@ -11,9 +11,9 @@ const Farm = () => {
   useEffect(() => {
     if (farm == null) {
       navigate("/");
-      console.log("Estou no IF");
     }
-  }, [farm, navigate]);
+  }, []);
+
   return (
     <div
       style={{
@@ -22,7 +22,7 @@ const Farm = () => {
       }}
     >
       <Sidebar />
-      <RowContainer style={{padding: "15px", overflow: "auto"}}>
+      <RowContainer style={{padding: "15px", background: "#fafafa"}}>
         <Outlet />
       </RowContainer>
     </div>
