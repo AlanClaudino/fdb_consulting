@@ -16,7 +16,7 @@ const Profile = () => {
   const userNameRef = useRef();
   const dialogRef = useRef();
   const formRef = useRef();
-  const {update} = useAuthContext();
+  const {update, user} = useAuthContext();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -69,6 +69,15 @@ const Profile = () => {
             <ErrorMessage>
               An error has ocurred. Please, try again.
             </ErrorMessage>
+          )}
+          {!user.displayName && (
+            <Text style={{fontSize: "20px", padding: "15px 0"}}>
+              Hello there! Welcome to{" "}
+              <span style={{color: "#4bb543", fontWeight: "bolder"}}>
+                FDB Consulting
+              </span>
+              . Please, fill out your profile information.
+            </Text>
           )}
           <ProfileForm
             handleSubmit={handleSubmit}
