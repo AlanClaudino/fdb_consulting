@@ -6,6 +6,7 @@ import ResetPasswordForm from "../components/ResetPasswordForm/ResetPasswordForm
 const ResetPassword = () => {
   const {resetPassword} = useAuthContext();
   const emailRef = useRef();
+  const formRef = useRef();
   const [error, setError] = useState("");
   const [sentMessage, setSentMessage] = useState("");
 
@@ -17,6 +18,7 @@ const ResetPassword = () => {
     try {
       await resetPassword(email);
       setSentMessage("The reset link was sent to your e-mail.");
+      formRef.current.reset();
     } catch (err) {
       console.log(err.message);
       setError("Failed to reset password. Please, try again.");
@@ -38,6 +40,7 @@ const ResetPassword = () => {
         emailRef={emailRef}
         error={error}
         sentMessage={sentMessage}
+        formRef={formRef}
       />
     </div>
   );

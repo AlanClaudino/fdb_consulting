@@ -20,13 +20,14 @@ const RegisterFarmForm = ({
   countyRef,
   stateRef,
   error,
+  formRef,
 }) => {
   return (
     <Background>
       <Container>
         <Title>Farm Details</Title>
         {error && <ErrorMessage>{error}</ErrorMessage>}
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit} ref={formRef}>
           <FormSection>
             <Label htmlFor="idNumber">Farm ID</Label>
             <Input
@@ -72,8 +73,8 @@ const RegisterFarmForm = ({
             <Input type="Text" placeholder="State" id="State" ref={stateRef} />
           </FormSection>
           <FormSection style={{background: "none", textAlign: "center"}}>
-            <SaveButton>Save</SaveButton>
-            <ClearButton>Clear</ClearButton>
+            <SaveButton type="submit">Save</SaveButton>
+            <ClearButton type="reset">Clear</ClearButton>
           </FormSection>
         </Form>
       </Container>

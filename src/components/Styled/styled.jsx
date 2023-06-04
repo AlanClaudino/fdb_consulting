@@ -119,3 +119,14 @@ export const SuccessMessage = styled("p")`
   color: #0d2329;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 `;
+
+export const ModalSuccess = styled("dialog")`
+  border: none;
+  border-left: 10px solid #4bb543;
+  background-color: rgb(250, 250, 250);
+  padding: 25px;
+  box-shadow: none;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+`;

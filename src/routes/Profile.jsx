@@ -3,17 +3,19 @@ import ProfileForm from "../components/ProfileForm/ProfileForm";
 import {
   Title,
   ColumnContainer,
-  SuccessMessage,
   StyledLink,
   ErrorMessage,
+  ModalSuccess,
+  Text,
 } from "../components/styled/styled";
 import {useAuthContext} from "../context/AuthContext";
 
 const Profile = () => {
   const [active, setActive] = useState();
   const [error, setError] = useState(false);
-  const [message, setMessage] = useState(false);
   const userNameRef = useRef();
+  const dialogRef = useRef();
+  const formRef = useRef();
   const {update} = useAuthContext();
 
   const handleSubmit = async (e) => {
@@ -33,7 +35,8 @@ const Profile = () => {
 
     try {
       await update(userInfo);
-      setMessage(true);
+      dialogRef.current.showModal();
+      formRef.current.reset();
     } catch (err) {
       console.log(err.message);
       setError(true);
@@ -62,12 +65,6 @@ const Profile = () => {
       >
         <ColumnContainer>
           <Title>Profile Information</Title>
-          {message && (
-            <SuccessMessage>
-              Success: Your profile has been updated. Go back to your{" "}
-              <StyledLink to={"/"}>Dashboard</StyledLink>.
-            </SuccessMessage>
-          )}
           {error && (
             <ErrorMessage>
               An error has ocurred. Please, try again.
@@ -78,7 +75,14 @@ const Profile = () => {
             userNameRef={userNameRef}
             active={active}
             handleActive={handleActive}
+            formRef={formRef}
           />
+          <ModalSuccess ref={dialogRef}>
+            <Text>
+              Success: Your profile has been updated. Go back to your{" "}
+              <StyledLink to={"/"}>Dashboard</StyledLink>.
+            </Text>
+          </ModalSuccess>
         </ColumnContainer>
       </div>
     </div>

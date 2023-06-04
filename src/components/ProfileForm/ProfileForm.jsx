@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import {DarkButton, Input, Text} from "../styled/styled";
 import {FormSection, RadioContainer, RadioInput} from "./styled";
 
@@ -6,12 +7,18 @@ import farm2 from "../../assets/farmer2.jpg";
 import farm3 from "../../assets/farmer3.jpg";
 import farm4 from "../../assets/farmer4.jpg";
 
-// eslint-disable-next-line react/prop-types
-const ProfileForm = ({handleSubmit, userNameRef, active, handleActive}) => {
+const ProfileForm = ({
+  handleSubmit,
+  userNameRef,
+  active,
+  handleActive,
+  formRef,
+}) => {
   return (
     <form
       style={{display: "flex", flexDirection: "column", gap: "10px"}}
       onSubmit={handleSubmit}
+      ref={formRef}
     >
       <FormSection>
         <Input

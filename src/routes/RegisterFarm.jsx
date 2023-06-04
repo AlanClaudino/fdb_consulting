@@ -12,6 +12,7 @@ const RegisterFarm = () => {
   const registrationRef = useRef();
   const countyRef = useRef();
   const stateRef = useRef();
+  const formRef = useRef();
 
   const {user} = useAuthContext();
   const {createFarm} = useDbContext();
@@ -52,6 +53,7 @@ const RegisterFarm = () => {
       registrationRef={registrationRef}
       countyRef={countyRef}
       stateRef={stateRef}
+      formRef={formRef}
       error={error}
     />
   );

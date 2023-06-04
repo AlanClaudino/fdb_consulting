@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import {
   DarkButton,
   StyledLink,
@@ -18,8 +19,13 @@ import {
 
 import logo from "../../assets/Cut-Logo.png";
 
-// eslint-disable-next-line react/prop-types
-const ResetPasswordForm = ({handleSubmit, emailRef, error, sentMessage}) => {
+const ResetPasswordForm = ({
+  handleSubmit,
+  emailRef,
+  error,
+  sentMessage,
+  formRef,
+}) => {
   return (
     <RowContainer>
       <ColumnContainer>
@@ -27,7 +33,7 @@ const ResetPasswordForm = ({handleSubmit, emailRef, error, sentMessage}) => {
         {error && <ErrorMessage>{error}</ErrorMessage>}
         {sentMessage && <SuccessMessage>{sentMessage}</SuccessMessage>}
 
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit} ref={formRef}>
           <Text>
             To receive a link to reset your password, please enter your email
             address.
