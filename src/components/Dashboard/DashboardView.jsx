@@ -1,4 +1,4 @@
-import {SubTitle, Title} from "../styled/styled";
+import {SubTitle, Text, Title} from "../styled/styled";
 import {
   DashContainer,
   DashboardOptions,
@@ -8,38 +8,56 @@ import {
   Section,
   WorkShopIcon,
   WorkersIcon,
+  DarkButton,
 } from "./styled";
 
 const DashboardView = () => {
   return (
     <DashContainer>
       <Title style={{textAlign: "start"}}>Dashboard</Title>
-      <Section>
-        <DashboardOptions>
-          <IconWrapper background="#226F54">
-            <ProcessIcon />
-          </IconWrapper>
-          <SubTitle>Workflow</SubTitle>
-        </DashboardOptions>
-        <DashboardOptions>
-          <IconWrapper background="#3B2C35">
-            <WorkShopIcon />
-          </IconWrapper>
-          <SubTitle>Machinery</SubTitle>
-        </DashboardOptions>
-        <DashboardOptions>
-          <IconWrapper background="#db3a34">
-            <InventoryIcon />
-          </IconWrapper>
-          <SubTitle>Inventory</SubTitle>
-        </DashboardOptions>
-        <DashboardOptions>
-          <IconWrapper background="#00CC66">
-            <WorkersIcon />
-          </IconWrapper>
-          <SubTitle>Workers</SubTitle>
-        </DashboardOptions>
-      </Section>
+      <section>
+        <SubTitle style={{textAlign: "start", fontSize: "28px"}}>
+          Manager
+        </SubTitle>
+        <Section>
+          <DashboardOptions>
+            <IconWrapper background="#226F54">
+              <ProcessIcon />
+            </IconWrapper>
+            <SubTitle>Workflow</SubTitle>
+          </DashboardOptions>
+          <DashboardOptions>
+            <IconWrapper background="#3B2C35">
+              <WorkShopIcon />
+            </IconWrapper>
+            <SubTitle>Machinery</SubTitle>
+          </DashboardOptions>
+          <DashboardOptions>
+            <IconWrapper background="#db3a34">
+              <InventoryIcon />
+            </IconWrapper>
+            <SubTitle>Inventory</SubTitle>
+          </DashboardOptions>
+          <DashboardOptions>
+            <IconWrapper background="#00CC66">
+              <WorkersIcon />
+            </IconWrapper>
+            <SubTitle>Workers</SubTitle>
+          </DashboardOptions>
+        </Section>
+      </section>
+      <section>
+        <SubTitle style={{textAlign: "start", fontSize: "28px"}}>
+          Budgets
+        </SubTitle>
+        <Section style={{flexDirection: "column", alignItems: "start"}}>
+          <Text>
+            No Budgets created yet. Let's start planning for the next season.
+          </Text>
+          <DarkButton>Create new budget</DarkButton>
+        </Section>
+        <Section></Section>
+      </section>
     </DashContainer>
   );
 };

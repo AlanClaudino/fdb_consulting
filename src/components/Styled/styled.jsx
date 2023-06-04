@@ -19,14 +19,14 @@ export const ColumnContainer = styled("div")`
 `;
 
 export const Title = styled("h1")`
-  color: ${(props) => (props.color ? props.color : "inherit")};
+  color: ${(props) => (props.color ? props.color : "#0d2329")};
   font-size: 32px;
   font-family: "Poppins", sans-serif;
   text-align: center;
 `;
 
 export const SubTitle = styled("h2")`
-  color: ${(props) => (props.color ? props.color : "inherit")};
+  color: ${(props) => (props.color ? props.color : "#0d2329")};
   font-size: 24px;
   font-family: "Poppins", sans-serif;
   text-align: center;

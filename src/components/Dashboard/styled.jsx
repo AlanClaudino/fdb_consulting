@@ -7,6 +7,7 @@ export const DashContainer = styled("div")`
   display: flex;
   flex-direction: column;
   align-items: stretch;
+  gap: 20px;
   width: 100%;
   height: 100%;
 `;
@@ -14,7 +15,7 @@ export const DashContainer = styled("div")`
 export const Section = styled("section")`
   padding: 10px 0;
   display: flex;
-  gap: 10px;
+  gap: 15px;
   flex-wrap: wrap;
   align-items: center;
 `;
@@ -24,13 +25,14 @@ export const DashboardOptions = styled("div")`
     props.background ? props.background : "#fff"};
   color: ${(props) => (props.color ? props.color : "#0d2d33")};
   display: flex;
+  flex: 1 1 250px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 10px;
   gap: 5px;
   height: 200px;
-  width: 250px;
+  max-width: 350px;
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
     rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
   border-radius: 20px;
@@ -72,4 +74,17 @@ export const IconWrapper = styled("div")`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+export const DarkButton = styled("button")`
+  background-color: #0d2329;
+  color: #fff;
+  border-radius: 24px;
+  font-size: 16px;
+  padding: 8px 16px;
+  border: none;
+  &:hover {
+    background-color: #4dd467;
+    cursor: pointer;
+  }
 `;
