@@ -1,5 +1,9 @@
 import {initializeApp} from "firebase/app";
-import {getAuth} from "firebase/auth";
+import {
+  browserSessionPersistence,
+  getAuth,
+  setPersistence,
+} from "firebase/auth";
 import {getFirestore} from "firebase/firestore";
 
 // TODO: Replace the following with your app's Firebase project configuration
@@ -17,4 +21,5 @@ const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 
 export const auth = getAuth(app);
+setPersistence(auth, browserSessionPersistence);
 export default app;
