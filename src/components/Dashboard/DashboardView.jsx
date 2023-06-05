@@ -1,4 +1,5 @@
-import {SubTitle, Text, Title} from "../styled/styled";
+import { useNavigate } from 'react-router-dom';
+import { SubTitle, Text, Title } from '../styled/styled';
 import {
   DashContainer,
   DashboardOptions,
@@ -10,43 +11,45 @@ import {
   WorkersIcon,
   DarkButton,
   BudgetIcon,
-} from "./styled";
+} from './styled';
 
 const DashboardView = () => {
+  const navigate = useNavigate();
+
   return (
     <DashContainer>
-      <Title style={{textAlign: "start"}}>Dashboard</Title>
+      <Title style={{ textAlign: 'start' }}>Dashboard</Title>
       <section>
-        <SubTitle style={{textAlign: "start", fontSize: "28px"}}>
+        <SubTitle style={{ textAlign: 'start', fontSize: '28px' }}>
           Manager
         </SubTitle>
         <Section>
-          <DashboardOptions>
-            <IconWrapper background="#226F54">
+          <DashboardOptions onClick={() => navigate('workflow')}>
+            <IconWrapper background='#226F54'>
               <ProcessIcon />
             </IconWrapper>
             <SubTitle>Workflow</SubTitle>
           </DashboardOptions>
           <DashboardOptions>
-            <IconWrapper background="#3B2C35">
+            <IconWrapper background='#3B2C35'>
               <WorkShopIcon />
             </IconWrapper>
             <SubTitle>Machinery</SubTitle>
           </DashboardOptions>
           <DashboardOptions>
-            <IconWrapper background="#db3a34">
+            <IconWrapper background='#db3a34'>
               <InventoryIcon />
             </IconWrapper>
             <SubTitle>Inventory</SubTitle>
           </DashboardOptions>
           <DashboardOptions>
-            <IconWrapper background="#65AFFF">
+            <IconWrapper background='#65AFFF'>
               <WorkersIcon />
             </IconWrapper>
             <SubTitle>Workers</SubTitle>
           </DashboardOptions>
           <DashboardOptions>
-            <IconWrapper background="#00CC66">
+            <IconWrapper background='#00CC66'>
               <BudgetIcon />
             </IconWrapper>
             <SubTitle>New Budget</SubTitle>
@@ -54,10 +57,10 @@ const DashboardView = () => {
         </Section>
       </section>
       <section>
-        <SubTitle style={{textAlign: "start", fontSize: "28px"}}>
+        <SubTitle style={{ textAlign: 'start', fontSize: '28px' }}>
           Budgets
         </SubTitle>
-        <Section style={{flexDirection: "column", alignItems: "start"}}>
+        <Section style={{ flexDirection: 'column', alignItems: 'start' }}>
           <Text>
             No Budgets created yet. Let's start planning for the next season.
           </Text>
