@@ -4,10 +4,12 @@ import {collection, getDocs, addDoc, query, where} from "firebase/firestore";
 
 const dbContext = createContext();
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useDbContext = () => {
   return useContext(dbContext);
 };
 
+// eslint-disable-next-line react/prop-types
 const DatabaseContext = ({children}) => {
   const [farm, setFarm] = useState(null);
   const [userFarms, setuserFarms] = useState(null);

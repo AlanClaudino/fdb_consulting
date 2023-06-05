@@ -42,7 +42,7 @@ const Farm = () => {
     if (farm == null) {
       navigate("/");
     }
-  }, []);
+  }, [farm, navigate]);
 
   return (
     <div
