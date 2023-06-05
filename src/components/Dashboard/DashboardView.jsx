@@ -9,6 +9,7 @@ import {
   WorkShopIcon,
   WorkersIcon,
   DarkButton,
+  BudgetIcon,
 } from "./styled";
 
 const DashboardView = () => {
@@ -39,10 +40,16 @@ const DashboardView = () => {
             <SubTitle>Inventory</SubTitle>
           </DashboardOptions>
           <DashboardOptions>
-            <IconWrapper background="#00CC66">
+            <IconWrapper background="#65AFFF">
               <WorkersIcon />
             </IconWrapper>
             <SubTitle>Workers</SubTitle>
+          </DashboardOptions>
+          <DashboardOptions>
+            <IconWrapper background="#00CC66">
+              <BudgetIcon />
+            </IconWrapper>
+            <SubTitle>New Budget</SubTitle>
           </DashboardOptions>
         </Section>
       </section>

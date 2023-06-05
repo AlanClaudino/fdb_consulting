@@ -1,7 +1,7 @@
-import styled from 'styled-components';
-import { User } from 'lucide-react';
+import styled from "styled-components";
+import {User} from "lucide-react";
 
-export const UserMenu = styled('div')`
+export const UserMenu = styled("div")`
   position: absolute;
   right: 20px;
   top: 50px;
@@ -15,7 +15,7 @@ export const UserMenu = styled('div')`
   }
 `;
 
-export const StyledHeader = styled('header')`
+export const StyledHeader = styled("header")`
   width: 100%;
   background-color: #0d2329;
   display: flex;
@@ -24,7 +24,7 @@ export const StyledHeader = styled('header')`
   padding: 5px 20px 5px 10px;
 `;
 
-export const MenuButton = styled('button')`
+export const MenuButton = styled("button")`
   background: none;
   border: none;
   padding: 0;
@@ -34,7 +34,7 @@ export const MenuButton = styled('button')`
   justify-content: center;
   cursor: pointer;
   &:hover {
-    color: ${(props) => (props.color ? props.color : 'none')};
+    color: ${(props) => (props.color ? props.color : "none")};
     cursor: pointer;
   }
 `;
@@ -44,8 +44,8 @@ export const UserIcon = styled(User)`
   border: 2px solid white;
 `;
 
-export const LogoText = styled('p')`
-  font-family: 'DM Sans', sans-serif;
+export const LogoText = styled("p")`
+  font-family: "DM Sans", sans-serif;
   font-size: 21px;
   color: white;
 `;

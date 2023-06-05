@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import {GiFarmTractor, GiFertilizerBag} from "react-icons/gi";
-import {FaClipboardList} from "react-icons/fa";
+import {FaClipboardList, FaMoneyCheckAlt} from "react-icons/fa";
 import {IoManSharp} from "react-icons/io5";
 
 export const DashContainer = styled("div")`
@@ -15,7 +15,7 @@ export const DashContainer = styled("div")`
 export const Section = styled("section")`
   padding: 10px 0;
   display: flex;
-  gap: 15px;
+  gap: 10px;
   flex-wrap: wrap;
   align-items: center;
 `;
@@ -25,14 +25,13 @@ export const DashboardOptions = styled("div")`
     props.background ? props.background : "#fff"};
   color: ${(props) => (props.color ? props.color : "#0d2d33")};
   display: flex;
-  flex: 1 1 250px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 10px;
   gap: 5px;
   height: 200px;
-  max-width: 350px;
+  width: 250px;
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
     rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
   border-radius: 20px;
@@ -61,6 +60,12 @@ export const InventoryIcon = styled(GiFertilizerBag)`
   color: #fff;
 `;
 export const WorkersIcon = styled(IoManSharp)`
+  height: 90px;
+  width: auto;
+  color: #fff;
+`;
+
+export const BudgetIcon = styled(FaMoneyCheckAlt)`
   height: 90px;
   width: auto;
   color: #fff;

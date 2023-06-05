@@ -1,21 +1,87 @@
-import { CalendarDaysIcon } from 'lucide-react';
-import { StyledSidebar, StyledSidebarItem, StyledSidebarText } from './styled';
+/* eslint-disable react/prop-types */
+import {
+  SelectContainer,
+  SideBudgetIcon,
+  SideCalendarIcon,
+  SideHomeIcon,
+  SideInventoryIcon,
+  SideMachineryIcon,
+  SideWorkerIcon,
+  SideWorkflowIcon,
+  StyledSidebar,
+  StyledSidebarItem,
+  StyledSidebarText,
+  StyledFarmSelected,
+  StyledArrowDown,
+  SelectFarmButton,
+  SelectButton,
+  SelectMenu,
+  StyledSelecteText,
+} from "./styled";
 
-const Sidebar = () => {
+import {useDbContext} from "../../context/dbContext";
+import {useNavigate} from "react-router-dom";
+
+const Sidebar = ({
+  isOpen,
+  handleFarmSelect,
+  handleMenuSelect,
+  farmMenuRef,
+  selectButtonRef,
+}) => {
+  const {userFarms, farm} = useDbContext();
+  const navigate = useNavigate();
+
   return (
     <StyledSidebar>
-      <StyledSidebarItem>
-        <CalendarDaysIcon color="#4dd467" />
-        <StyledSidebarText color="white">Dashboard</StyledSidebarText>
+      <SelectContainer>
+        <SelectButton onClick={handleMenuSelect} ref={selectButtonRef}>
+          <StyledFarmSelected>{farm && farm.farmName}</StyledFarmSelected>
+          <StyledArrowDown size={16} />
+        </SelectButton>
+      </SelectContainer>
+      <StyledSidebarItem onClick={() => navigate("/")}>
+        <SideHomeIcon />
+        <StyledSidebarText>Home</StyledSidebarText>
+      </StyledSidebarItem>
+      <StyledSidebarItem onClick={() => navigate("/farm")}>
+        <SideCalendarIcon />
+        <StyledSidebarText>Dashboard</StyledSidebarText>
       </StyledSidebarItem>
       <StyledSidebarItem>
-        <CalendarDaysIcon color="#4dd467" />
-        <StyledSidebarText color="white">Dashboard</StyledSidebarText>
+        <SideWorkflowIcon />
+        <StyledSidebarText>Workflow</StyledSidebarText>
       </StyledSidebarItem>
       <StyledSidebarItem>
-        <CalendarDaysIcon color="#4dd467" />
-        <StyledSidebarText color="white">Dashboard</StyledSidebarText>
+        <SideMachineryIcon />
+        <StyledSidebarText>Machinery</StyledSidebarText>
       </StyledSidebarItem>
+      <StyledSidebarItem>
+        <SideInventoryIcon />
+        <StyledSidebarText>Inventory</StyledSidebarText>
+      </StyledSidebarItem>
+      <StyledSidebarItem>
+        <SideWorkerIcon />
+        <StyledSidebarText>Workers</StyledSidebarText>
+      </StyledSidebarItem>
+      <StyledSidebarItem>
+        <SideBudgetIcon />
+        <StyledSidebarText>Budgets</StyledSidebarText>
+      </StyledSidebarItem>
+      <SelectMenu ref={farmMenuRef}>
+        {isOpen &&
+          userFarms &&
+          userFarms.map((farmItem) => {
+            return (
+              <SelectFarmButton
+                key={farmItem.id}
+                onClick={() => handleFarmSelect(farmItem.id)}
+              >
+                <StyledSelecteText>{farmItem.farmName}</StyledSelecteText>
+              </SelectFarmButton>
+            );
+          })}
+      </SelectMenu>
     </StyledSidebar>
   );
 };
