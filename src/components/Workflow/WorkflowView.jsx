@@ -1,30 +1,41 @@
-import {DarkButton, InnerSection, Section, WorflowContainer} from "./styled";
-import {Text, Title} from "../styled/styled";
-import {Edit2Icon, PlusIcon} from "lucide-react";
+import {
+  DarkButton,
+  DeleteButton,
+  EditButton,
+  InnerSection,
+  TableContainer,
+  TableData,
+  TableTitle,
+  WorflowContainer,
+} from './styled';
+import { Text, Title } from '../styled/styled';
+import { DeleteIcon, Edit2Icon, PlusIcon, Trash, Trash2 } from 'lucide-react';
 
 const WorkflowView = () => {
   return (
     <WorflowContainer>
-      <Title style={{textAlign: "start"}}>Production Systems</Title>
+      <Title style={{ textAlign: 'start' }}>Production Systems</Title>
       <section>
         <DarkButton>
           <PlusIcon size={16} /> Create new Workflow
         </DarkButton>
-        <Section style={{backgroundColor: "#0d2329", color: "#f4f4f4"}}>
+      </section>
+      <TableContainer>
+        <TableTitle>
           <InnerSection>
-            <Text style={{fontWeight: "bolder"}}>Id</Text>
+            <Text>Id</Text>
           </InnerSection>
           <InnerSection>
-            <Text style={{fontWeight: "bolder"}}>Crop</Text>
+            <Text>Crop</Text>
           </InnerSection>
           <InnerSection>
-            <Text style={{fontWeight: "bolder"}}>Description</Text>
+            <Text>Description</Text>
           </InnerSection>
           <InnerSection>
-            <Text style={{fontWeight: "bolder"}}>Manage</Text>
+            <Text>Manage</Text>
           </InnerSection>
-        </Section>
-        <Section>
+        </TableTitle>
+        <TableData>
           <InnerSection>
             <Text>001</Text>
           </InnerSection>
@@ -35,10 +46,34 @@ const WorkflowView = () => {
             <Text>No Tillage</Text>
           </InnerSection>
           <InnerSection>
-            <Edit2Icon />
+            <EditButton>
+              <Edit2Icon size={18} />
+            </EditButton>
+            <DeleteButton>
+              <Trash2 size={18} />
+            </DeleteButton>
           </InnerSection>
-        </Section>
-      </section>
+        </TableData>
+        <TableData>
+          <InnerSection>
+            <Text>001</Text>
+          </InnerSection>
+          <InnerSection>
+            <Text>Soybean</Text>
+          </InnerSection>
+          <InnerSection>
+            <Text>No Tillage</Text>
+          </InnerSection>
+          <InnerSection>
+            <EditButton>
+              <Edit2Icon size={18} />
+            </EditButton>
+            <DeleteButton>
+              <Trash2 size={18} />
+            </DeleteButton>
+          </InnerSection>
+        </TableData>
+      </TableContainer>
     </WorflowContainer>
   );
 };
