@@ -11,8 +11,10 @@ export const useDbContext = () => {
 
 // eslint-disable-next-line react/prop-types
 const DatabaseContext = ({children}) => {
-  const [farm, setFarm] = useState(null);
-  const [userFarms, setuserFarms] = useState(null);
+  const [farm, setFarm] = useState();
+  const [workflow, setWorkflow] = useState();
+  const [userFarms, setuserFarms] = useState();
+  const [farmWorkflows, setFarmWorkflows] = useState();
 
   const farmsCollectionRef = collection(db, "Farms");
 
@@ -42,6 +44,8 @@ const DatabaseContext = ({children}) => {
       (farm) => farm.id === selectedFarmId
     );
     setFarm(selectedFarm);
+    getFarmWorkflows(selectedFarmId);
+    setWorkflow(null);
   };
 
   const createFarm = async (farmInfo) => {
@@ -53,9 +57,66 @@ const DatabaseContext = ({children}) => {
     }
   };
 
+  const getFarmWorkflows = async (farmId) => {
+    const workflows = [];
+
+    const workflowSubcollectionRef = collection(
+      db,
+      "Farms",
+      farmId,
+      "workflows"
+    );
+
+    try {
+      const farmDocs = await getDocs(workflowSubcollectionRef);
+
+      farmDocs.forEach((doc) => {
+        const farm = {id: doc.id, ...doc.data()};
+        workflows.push(farm);
+      });
+
+      setFarmWorkflows(workflows);
+    } catch (error) {
+      return error;
+    }
+  };
+
+  const createWorkflow = async (workflowInfo) => {
+    const workflowSubcollectionRef = collection(
+      db,
+      "Farms",
+      farm?.id,
+      "workflows"
+    );
+    try {
+      const workflowRef = await addDoc(workflowSubcollectionRef, workflowInfo);
+      setWorkflow({id: workflowRef.id, ...workflowInfo});
+    } catch (error) {
+      return error;
+    }
+  };
+
+  const getSelectedWorkflow = async (workflowId) => {
+    const [selectedWorkflow] = userFarms.filter(
+      (workflow) => workflow.id === workflowId
+    );
+    setWorkflow(selectedWorkflow);
+  };
+
   return (
     <dbContext.Provider
-      value={{farm, userFarms, createFarm, getUserFarms, getSelectedFarm}}
+      value={{
+        farm,
+        userFarms,
+        workflow,
+        farmWorkflows,
+        createFarm,
+        getUserFarms,
+        getSelectedFarm,
+        createWorkflow,
+        getFarmWorkflows,
+        getSelectedWorkflow,
+      }}
     >
       {children}
     </dbContext.Provider>

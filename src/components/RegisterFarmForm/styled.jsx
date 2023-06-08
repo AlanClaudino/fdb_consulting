@@ -1,7 +1,7 @@
-import styled from 'styled-components';
-import background from '../../assets/farmBackground.svg';
+import styled from "styled-components";
+import background from "../../assets/farmBackground.svg";
 
-export const Background = styled('div')`
+export const Background = styled("div")`
   height: 100%;
   width: 100vw;
   display: flex;
@@ -11,7 +11,7 @@ export const Background = styled('div')`
   background-size: cover;
 `;
 
-export const Container = styled('div')`
+export const Container = styled("div")`
   flex-grow: 1;
   display: flex;
   flex-direction: column;
@@ -25,15 +25,15 @@ export const Container = styled('div')`
   padding: 5px;
 `;
 
-export const Title = styled('h1')`
+export const Title = styled("h1")`
   margin: 15px;
   color: #0d2329;
   font-size: 32px;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   text-align: center;
 `;
 
-export const Form = styled('form')`
+export const Form = styled("form")`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -41,21 +41,21 @@ export const Form = styled('form')`
   width: 100%;
 `;
 
-export const Label = styled('label')`
+export const Label = styled("label")`
   color: #0d2329;
   font-size: 16px;
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   margin-right: 5px;
   padding: 5px;
   display: block;
   font-weight: bolder;
 `;
 
-export const Input = styled('input')`
+export const Input = styled("input")`
   color: #0d2329;
   font-size: 16px;
   padding: 5px;
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   border: 2px solid rgba(13, 35, 41, 0.3);
   border-radius: 5px;
   width: 100%;
@@ -70,15 +70,15 @@ export const Input = styled('input')`
   }
 `;
 
-export const FormSection = styled('section')`
+export const FormSection = styled("section")`
   width: 80%;
   padding: 5px 30px 15px 30px;
   text-align: start;
   background-color: #f4f4f4;
 `;
 
-export const SaveButton = styled('button')`
-  background-color: #4dd467;
+export const SaveButton = styled("button")`
+  background-color: #01ae57;
   color: white;
   font-weight: bolder;
   border-radius: 5px;
@@ -87,13 +87,13 @@ export const SaveButton = styled('button')`
   border: none;
   margin: 10px;
   &:hover {
-    background-color: #46bd5e;
+    background-color: #00cc66;
     cursor: pointer;
   }
 `;
 
-export const ClearButton = styled('button')`
-  background-color: #0d2d33;
+export const ClearButton = styled("button")`
+  background-color: #d12b25;
   color: white;
   font-weight: bolder;
   border-radius: 5px;
@@ -102,7 +102,7 @@ export const ClearButton = styled('button')`
   border: none;
   margin: 10px;
   &:hover {
-    background-color: #144850;
+    background-color: #db3a34;
     cursor: pointer;
   }
 `;

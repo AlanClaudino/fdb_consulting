@@ -45,10 +45,12 @@ export const StyledSidebar = styled("div")`
   position: relative;
   height: 100%;
   background-color: #0d2d33;
+  border-right: 1px solid #0d2329;
   display: flex;
   flex-direction: column;
   justify-content: start;
   align-items: start;
+  z-index: 2;
 `;
 
 export const StyledSidebarText = styled("p")`

@@ -1,12 +1,12 @@
-import { Navigate, Outlet } from 'react-router-dom';
-import { useAuthContext } from '../context/AuthContext';
+import {Navigate, Outlet} from "react-router-dom";
+import {useAuthContext} from "../context/AuthContext";
 
 // eslint-disable-next-line react/prop-types
 const ProtectedRoutes = () => {
-  const { user } = useAuthContext();
+  const {user} = useAuthContext();
 
   if (!user) {
-    return <Navigate to={'signin'} />;
+    return <Navigate to={"signin"} />;
   }
 
   return <Outlet />;

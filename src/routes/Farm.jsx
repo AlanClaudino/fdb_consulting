@@ -1,16 +1,16 @@
-import { Outlet, useNavigate } from 'react-router-dom';
-import Sidebar from '../components/Sidebar/Sidebar.jsx';
-import { RowContainer } from '../components/styled/styled.jsx';
-import { useDbContext } from '../context/dbContext.jsx';
-import { useEffect } from 'react';
-import { useState } from 'react';
-import { useRef } from 'react';
+import {Navigate, Outlet, useNavigate} from "react-router-dom";
+import Sidebar from "../components/Sidebar/Sidebar.jsx";
+import {RowContainer} from "../components/styled/styled.jsx";
+import {useDbContext} from "../context/dbContext.jsx";
+import {useEffect} from "react";
+import {useState} from "react";
+import {useRef} from "react";
 
 // isOpen, handleFarmSelect, handleMenuSelect;
 
 const Farm = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { farm, getSelectedFarm } = useDbContext();
+  const {farm, getSelectedFarm} = useDbContext();
   const navigate = useNavigate();
   const farmMenuRef = useRef();
   const selectButtonRef = useRef();
@@ -34,22 +34,20 @@ const Farm = () => {
       }
     };
 
-    document.addEventListener('mousedown', handleClick);
+    document.addEventListener("mousedown", handleClick);
 
-    return () => document.removeEventListener('mousedown', handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
   }, []);
 
-  useEffect(() => {
-    if (farm == null) {
-      navigate('/');
-    }
-  }, [farm, navigate]);
+  if (!farm) {
+    return <Navigate to={"/"} />;
+  }
 
   return (
     <div
       style={{
-        display: 'grid',
-        gridTemplateColumns: '200px auto',
+        display: "grid",
+        gridTemplateColumns: "200px auto",
       }}
     >
       <Sidebar
@@ -59,7 +57,9 @@ const Farm = () => {
         selectButtonRef={selectButtonRef}
         handleFarmSelect={handleFarmSelect}
       />
-      <RowContainer style={{ padding: '15px', background: '#fafafa' }}>
+      <RowContainer
+        style={{padding: "15px", background: "#fafafa", position: "relative"}}
+      >
         <Outlet />
       </RowContainer>
     </div>

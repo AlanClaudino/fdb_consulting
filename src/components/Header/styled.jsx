@@ -13,6 +13,7 @@ export const UserMenu = styled("div")`
     border: none;
     outline: none;
   }
+  z-index: 2;
 `;
 
 export const StyledHeader = styled("header")`
