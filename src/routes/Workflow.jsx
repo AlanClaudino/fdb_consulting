@@ -41,8 +41,9 @@ const Workflow = () => {
     }
   };
 
-  const handleEdit = async () => {
-    await getSelectedWorkflow();
+  const handleEdit = async (id) => {
+    console.log("ID", id);
+    await getSelectedWorkflow(id);
     navigate("../edit-workflow");
   };
 

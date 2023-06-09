@@ -1,6 +1,14 @@
 import {createContext, useContext, useState} from "react";
 import {db} from "../Firebase";
-import {collection, getDocs, addDoc, query, where} from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  addDoc,
+  query,
+  where,
+  updateDoc,
+  doc,
+} from "firebase/firestore";
 
 const dbContext = createContext();
 
@@ -97,10 +105,28 @@ const DatabaseContext = ({children}) => {
   };
 
   const getSelectedWorkflow = async (workflowId) => {
-    const [selectedWorkflow] = userFarms.filter(
+    const [selectedWorkflow] = farmWorkflows.filter(
       (workflow) => workflow.id === workflowId
     );
     setWorkflow(selectedWorkflow);
+  };
+
+  const updateWorkflow = async (workflowInfo) => {
+    const workflowDocRef = doc(
+      db,
+      "Farms",
+      farm?.id,
+      "workflows",
+      workflow?.id
+    );
+    console.log("UPDATED");
+    try {
+      await updateDoc(workflowDocRef, workflowInfo);
+      return "Workflow Successfully updated.";
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
   };
 
   return (
@@ -116,6 +142,7 @@ const DatabaseContext = ({children}) => {
         createWorkflow,
         getFarmWorkflows,
         getSelectedWorkflow,
+        updateWorkflow,
       }}
     >
       {children}

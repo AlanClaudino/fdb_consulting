@@ -80,7 +80,7 @@ const WorkflowView = ({
                     <Text>{workflow.description}</Text>
                   </InnerSection>
                   <InnerSection>
-                    <EditButton onClick={handleEdit}>
+                    <EditButton onClick={() => handleEdit(workflow.id)}>
                       <Edit2Icon size={18} />
                     </EditButton>
                     <DeleteButton>
@@ -110,7 +110,7 @@ const WorkflowView = ({
               <FormSection
                 style={{textAlign: "center", backgroundColor: "#fafafa"}}
               >
-                <SaveButton>Create</SaveButton>
+                <SaveButton type="submit">Create</SaveButton>
                 <ClearButton onClick={handleClose}>Cancel</ClearButton>
               </FormSection>
             </Form>
