@@ -17,10 +17,10 @@ import {
   SelectButton,
   SelectMenu,
   StyledSelecteText,
-} from './styled';
+} from "./styled";
 
-import { useDbContext } from '../../context/dbContext';
-import { useNavigate } from 'react-router-dom';
+import {useDbContext} from "../../context/dbContext";
+import {useNavigate} from "react-router-dom";
 
 const Sidebar = ({
   isOpen,
@@ -29,8 +29,13 @@ const Sidebar = ({
   farmMenuRef,
   selectButtonRef,
 }) => {
-  const { userFarms, farm } = useDbContext();
+  const {userFarms, farm, getFarmWorkflows} = useDbContext();
   const navigate = useNavigate();
+
+  const navigateWorkflow = async () => {
+    await getFarmWorkflows(farm.id);
+    navigate("/farm/workflow");
+  };
 
   return (
     <StyledSidebar>
@@ -40,15 +45,15 @@ const Sidebar = ({
           <StyledArrowDown size={16} />
         </SelectButton>
       </SelectContainer>
-      <StyledSidebarItem onClick={() => navigate('/')}>
+      <StyledSidebarItem onClick={() => navigate("/")}>
         <SideHomeIcon />
         <StyledSidebarText>Home</StyledSidebarText>
       </StyledSidebarItem>
-      <StyledSidebarItem onClick={() => navigate('/farm')}>
+      <StyledSidebarItem onClick={() => navigate("/farm")}>
         <SideCalendarIcon />
         <StyledSidebarText>Dashboard</StyledSidebarText>
       </StyledSidebarItem>
-      <StyledSidebarItem onClick={() => navigate('/farm/workflow')}>
+      <StyledSidebarItem onClick={navigateWorkflow}>
         <SideWorkflowIcon />
         <StyledSidebarText>Workflow</StyledSidebarText>
       </StyledSidebarItem>

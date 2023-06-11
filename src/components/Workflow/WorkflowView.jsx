@@ -31,6 +31,7 @@ const WorkflowView = ({
   descriptionRef,
   error,
   handleEdit,
+  handleDelete,
 }) => {
   const {farmWorkflows} = useDbContext();
 
@@ -83,7 +84,7 @@ const WorkflowView = ({
                     <EditButton onClick={() => handleEdit(workflow.id)}>
                       <Edit2Icon size={18} />
                     </EditButton>
-                    <DeleteButton>
+                    <DeleteButton onClick={() => handleDelete(workflow.id)}>
                       <Trash2 size={18} />
                     </DeleteButton>
                   </InnerSection>

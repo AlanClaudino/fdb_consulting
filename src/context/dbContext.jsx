@@ -8,6 +8,7 @@ import {
   where,
   updateDoc,
   doc,
+  deleteDoc,
 } from "firebase/firestore";
 
 const dbContext = createContext();
@@ -129,6 +130,15 @@ const DatabaseContext = ({children}) => {
     }
   };
 
+  const deleteWorkflow = async (workflowId) => {
+    const workflowDocRef = doc(db, "Farms", farm?.id, "workflows", workflowId);
+    try {
+      await deleteDoc(workflowDocRef);
+    } catch (error) {
+      return error;
+    }
+  };
+
   return (
     <dbContext.Provider
       value={{
@@ -143,6 +153,7 @@ const DatabaseContext = ({children}) => {
         getFarmWorkflows,
         getSelectedWorkflow,
         updateWorkflow,
+        deleteWorkflow,
       }}
     >
       {children}

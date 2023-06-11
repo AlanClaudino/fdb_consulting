@@ -11,7 +11,13 @@ const Workflow = () => {
   const cropRef = useRef();
   const descriptionRef = useRef();
 
-  const {createWorkflow, getSelectedWorkflow} = useDbContext();
+  const {
+    farm,
+    createWorkflow,
+    getSelectedWorkflow,
+    deleteWorkflow,
+    getFarmWorkflows,
+  } = useDbContext();
   const navigate = useNavigate();
 
   const handleNewWorkflow = () => {
@@ -30,6 +36,7 @@ const Workflow = () => {
     const newWorkflow = {
       crop: cropRef.current.value,
       description: descriptionRef.current.value,
+      subProcesses: [],
     };
 
     try {
@@ -37,14 +44,23 @@ const Workflow = () => {
       navigate("../edit-workflow");
     } catch (error) {
       console.log(error.message);
-      setError("Failed to register Farm. Please, try again.");
+      setError("Failed to register workflow. Please, try again.");
     }
   };
 
   const handleEdit = async (id) => {
-    console.log("ID", id);
     await getSelectedWorkflow(id);
     navigate("../edit-workflow");
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      await deleteWorkflow(id);
+      getFarmWorkflows(farm.id);
+    } catch (error) {
+      console.log(error);
+      setError("Failed to delete the workflow. Please, try again.");
+    }
   };
 
   return (
@@ -57,6 +73,7 @@ const Workflow = () => {
       descriptionRef={descriptionRef}
       handleSubmit={handleSubmit}
       handleEdit={handleEdit}
+      handleDelete={handleDelete}
       error={error}
     />
   );

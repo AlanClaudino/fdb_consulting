@@ -1,12 +1,7 @@
-import {ChevronRightSquare, MinusSquareIcon} from "lucide-react";
+import {ChevronRightSquare, MinusSquareIcon, XSquareIcon} from "lucide-react";
+import {SubTitle, Text, Title} from "../styled/styled";
 import {
   ErrorMessage,
-  SubTitle,
-  SuccessMessage,
-  Text,
-  Title,
-} from "../styled/styled";
-import {
   ActivitiesContainer,
   AddButton,
   CategoryText,
@@ -18,14 +13,19 @@ import {
   SaveButton,
   SubprocessContainer,
   WorkflowContainer,
+  SuccessMessage,
+  CloseButton,
 } from "./styled";
 import {useEffect, useRef, useState} from "react";
 import {useDbContext} from "../../context/dbContext";
 import AddMore from "./components/AddMore";
 import AddMoreActivity from "./components/AddMoreActivity";
+import {useNavigate} from "react-router-dom";
 
 const EditWorkflowView = () => {
-  const {workflow, updateWorkflow} = useDbContext();
+  const {workflow, updateWorkflow, getFarmWorkflows, farm} = useDbContext();
+  const navigate = useNavigate();
+
   const [isNewSubOpen, setisNewSubOpen] = useState(false);
   const [subProcesses, setSubProcesses] = useState(workflow.subProcesses);
   const [subProcessControl, setsubProcessControl] = useState([]);
@@ -43,6 +43,7 @@ const EditWorkflowView = () => {
       });
     });
     setsubProcessControl(newControl);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const subProcessesFormRef = useRef();
@@ -50,6 +51,7 @@ const EditWorkflowView = () => {
   const subProcessesDescRef = useRef();
 
   const subHandleSubmit = (e) => {
+    if (message) setMessage("");
     e.preventDefault();
     const newSubpro = {
       id: subProcessesIdRef.current.value,
@@ -71,7 +73,7 @@ const EditWorkflowView = () => {
   };
 
   const handleFormChange = (index, event) => {
-    console.log(index, event.target.value, event.target.name);
+    if (message) setMessage("");
     let data = [...subProcessControl];
     data[index][event.target.name] = event.target.value;
     setsubProcessControl(data);
@@ -111,6 +113,7 @@ const EditWorkflowView = () => {
   };
 
   const handleSave = async () => {
+    setMessage("");
     const info = {
       subProcesses: subProcesses,
     };
@@ -118,11 +121,15 @@ const EditWorkflowView = () => {
     try {
       console.log("Estive aqui");
       const update = await updateWorkflow(info);
-      console.log(update);
       setMessage(update);
     } catch (error) {
       setError(error);
     }
+  };
+
+  const handleCancel = async () => {
+    await getFarmWorkflows(farm.id);
+    navigate("/farm/workflow");
   };
 
   return (
@@ -132,8 +139,22 @@ const EditWorkflowView = () => {
         <SubTitle style={{fontSize: "20px"}}>Desc:</SubTitle>
         <Text>{workflow.description}</Text>
       </ItemContainer>
-      {error && <ErrorMessage>{error}</ErrorMessage>}
-      {message && <SuccessMessage>{message}</SuccessMessage>}
+      {error && (
+        <ErrorMessage>
+          {error}
+          <CloseButton onClick={() => setError("")}>
+            <XSquareIcon />
+          </CloseButton>
+        </ErrorMessage>
+      )}
+      {message && (
+        <SuccessMessage>
+          {message}
+          <CloseButton onClick={() => setMessage("")}>
+            <XSquareIcon />
+          </CloseButton>
+        </SuccessMessage>
+      )}
       <WorkflowContainer>
         <CropContainer>
           <MinusSquareIcon size={16} />
@@ -141,7 +162,7 @@ const EditWorkflowView = () => {
           <Text>{workflow.crop}</Text>
         </CropContainer>
         <ProcessesContainer>
-          {subProcesses.map((item, index) => {
+          {subProcesses?.map((item, index) => {
             return (
               <section key={item.id}>
                 <ItemContainer>
@@ -200,7 +221,7 @@ const EditWorkflowView = () => {
       </WorkflowContainer>
       <ItemContainer>
         <SaveButton onClick={handleSave}>Save</SaveButton>
-        <ClearButton>Cancel</ClearButton>
+        <ClearButton onClick={handleCancel}>Cancel</ClearButton>
       </ItemContainer>
     </EditWorkflowContainer>
   );

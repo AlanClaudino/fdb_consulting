@@ -1,4 +1,4 @@
-import {Navigate, Outlet, useNavigate} from "react-router-dom";
+import {Navigate, Outlet} from "react-router-dom";
 import Sidebar from "../components/Sidebar/Sidebar.jsx";
 import {RowContainer} from "../components/styled/styled.jsx";
 import {useDbContext} from "../context/dbContext.jsx";
@@ -11,7 +11,6 @@ import {useRef} from "react";
 const Farm = () => {
   const [isOpen, setIsOpen] = useState(false);
   const {farm, getSelectedFarm} = useDbContext();
-  const navigate = useNavigate();
   const farmMenuRef = useRef();
   const selectButtonRef = useRef();
 
