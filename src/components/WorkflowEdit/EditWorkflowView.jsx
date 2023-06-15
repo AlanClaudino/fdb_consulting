@@ -1,33 +1,29 @@
-import {ChevronRightSquare, MinusSquareIcon, XSquareIcon} from "lucide-react";
+import {XSquareIcon} from "lucide-react";
 import {SubTitle, Text, Title} from "../styled/styled";
 import {
   ErrorMessage,
   ActivitiesContainer,
-  AddButton,
-  CategoryText,
   ClearButton,
-  CropContainer,
   EditWorkflowContainer,
   ItemContainer,
   ProcessesContainer,
   SaveButton,
-  SubprocessContainer,
   WorkflowContainer,
   SuccessMessage,
   CloseButton,
 } from "./styled";
-import {useEffect, useRef, useState} from "react";
+import {useEffect, useState} from "react";
 import {useDbContext} from "../../context/dbContext";
-import AddMore from "./components/AddMore";
-import AddMoreActivity from "./components/AddMoreActivity";
 import {useNavigate} from "react-router-dom";
+import AddInfo from "./components/AddInfo";
+import TreeItem from "./components/TreeItem";
 
 const EditWorkflowView = () => {
   const {workflow, updateWorkflow, getFarmWorkflows, farm} = useDbContext();
   const navigate = useNavigate();
 
-  const [isNewSubOpen, setisNewSubOpen] = useState(false);
   const [subProcesses, setSubProcesses] = useState(workflow.subProcesses);
+  const [crop, setCrop] = useState(workflow.crop);
   const [subProcessControl, setsubProcessControl] = useState([]);
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
@@ -37,67 +33,57 @@ const EditWorkflowView = () => {
     subProcesses.forEach(() => {
       newControl.push({
         ActivitiesIsOpen: false,
-        isOpen: false,
-        id: "",
-        description: "",
       });
     });
     setsubProcessControl(newControl);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const subProcessesFormRef = useRef();
-  const subProcessesIdRef = useRef();
-  const subProcessesDescRef = useRef();
-
-  const subHandleSubmit = (e) => {
+  const newHandleSubmit = (e, info) => {
     if (message) setMessage("");
-    e.preventDefault();
+
     const newSubpro = {
-      id: subProcessesIdRef.current.value,
-      description: subProcessesDescRef.current.value,
+      id: info.inputOne,
+      description: info.inputTwo,
       activities: [],
     };
     const newSubProcesses = [...subProcesses, newSubpro];
     setSubProcesses(newSubProcesses);
-    subProcessesFormRef.current.reset();
 
     const newControl = [...subProcessControl];
     newControl.push({
       ActivitiesIsOpen: false,
-      isOpen: false,
-      id: "",
-      description: "",
     });
     setsubProcessControl(newControl);
   };
 
-  const handleFormChange = (index, event) => {
-    if (message) setMessage("");
-    let data = [...subProcessControl];
-    data[index][event.target.name] = event.target.value;
-    setsubProcessControl(data);
-  };
-
-  const handleActivitySubmit = (index, evt) => {
-    evt.preventDefault();
+  const newHandleActivitySubmit = (evt, info, index) => {
     const newActivity = {
-      id: subProcessControl[index].id,
-      description: subProcessControl[index].description,
+      id: info.inputOne,
+      description: info.inputTwo,
     };
 
     const data = [...subProcesses];
     data[index].activities.push(newActivity);
     setSubProcesses(data);
-
-    const control = [...subProcessControl];
-    control[index].id = "";
-    control[index].description = "";
-    setsubProcessControl(control);
   };
 
-  const handleNewSub = () => {
-    setisNewSubOpen(!isNewSubOpen);
+  const editActivity = (inputOne, inputTwo, index, actIndex) => {
+    const data = [...subProcesses];
+    data[index].activities[actIndex].id = inputOne;
+    data[index].activities[actIndex].description = inputTwo;
+    setSubProcesses(data);
+  };
+
+  const editSubprocess = (inputOne, inputTwo, index) => {
+    const data = [...subProcesses];
+    data[index].id = inputOne;
+    data[index].description = inputTwo;
+    setSubProcesses(data);
+  };
+
+  const editCrop = (inputOne, inputTwo) => {
+    setCrop(inputTwo);
   };
 
   const handleActivityList = (index) => {
@@ -106,15 +92,10 @@ const EditWorkflowView = () => {
     setsubProcessControl(newControl);
   };
 
-  const handleNewActivity = (index) => {
-    const newControl = [...subProcessControl];
-    newControl[index].isOpen = !newControl[index].isOpen;
-    setsubProcessControl(newControl);
-  };
-
   const handleSave = async () => {
     setMessage("");
     const info = {
+      crop: crop,
       subProcesses: subProcesses,
     };
     console.log("INFO", info);
@@ -156,66 +137,65 @@ const EditWorkflowView = () => {
         </SuccessMessage>
       )}
       <WorkflowContainer>
-        <CropContainer>
-          <MinusSquareIcon size={16} />
-          <CategoryText>Crop</CategoryText>
-          <Text>{workflow.crop}</Text>
-        </CropContainer>
+        <TreeItem
+          isClickable={false}
+          category={"Crop"}
+          itemOne={"001"}
+          itemTwo={crop}
+          handleForm={editCrop}
+        />
         <ProcessesContainer>
           {subProcesses?.map((item, index) => {
             return (
               <section key={item.id}>
-                <ItemContainer>
-                  <SubprocessContainer>
-                    <AddButton onClick={() => handleActivityList(index)}>
-                      <ChevronRightSquare size={16} />
-                      <CategoryText>Sub-Process</CategoryText>
-                    </AddButton>
-                  </SubprocessContainer>
-                  <Text>{`${item.id} - ${item.description}`}</Text>
-                </ItemContainer>
+                <TreeItem
+                  isClickable={true}
+                  category={"Sub-Process"}
+                  itemOne={item.id}
+                  itemTwo={item.description}
+                  handleClick={() => handleActivityList(index)}
+                  handleForm={(inputOne, inputTwo) =>
+                    editSubprocess(inputOne, inputTwo, index)
+                  }
+                />
                 {subProcessControl[index]?.ActivitiesIsOpen && (
                   <ActivitiesContainer>
-                    {item.activities.map((activity) => {
+                    {item.activities.map((activity, actIndex) => {
                       return (
-                        <ItemContainer key={activity.id}>
-                          <MinusSquareIcon size={16} />
-                          <CategoryText>Activity</CategoryText>
-                          <Text>{`${activity.id} - ${activity.description}`}</Text>
-                        </ItemContainer>
+                        <>
+                          <TreeItem
+                            item={activity}
+                            key={activity.id}
+                            isClickable={false}
+                            category={"Activity"}
+                            itemOne={activity.id}
+                            itemTwo={activity.description}
+                            handleForm={(inputOne, inputTwo) =>
+                              editActivity(inputOne, inputTwo, index, actIndex)
+                            }
+                          />
+                        </>
                       );
                     })}
-                    <AddMoreActivity
-                      isOpen={subProcessControl[index].isOpen}
-                      handleIsOpen={() => handleNewActivity(index)}
-                      handleSubmit={(evt) => handleActivitySubmit(index, evt)}
-                      firstInputValue={subProcessControl[index].id}
-                      firstInputOnChange={(evt) => handleFormChange(index, evt)}
-                      firstInputLabel={"Id: "}
-                      secondInputValue={subProcessControl[index].description}
-                      secondInputOnChange={(evt) =>
-                        handleFormChange(index, evt)
-                      }
-                      secondInputName={"description"}
-                      firstInputName={"id"}
-                      secondInputLabel={"Description: "}
-                      buttonText={"New Activity"}
+
+                    <AddInfo
+                      handleSubmit={newHandleActivitySubmit}
+                      firstInputLabel="Id"
+                      secondInputLabel="Description"
+                      buttonText="Add new activity"
+                      index={index}
                     />
                   </ActivitiesContainer>
                 )}
               </section>
             );
           })}
-          <AddMore
-            isOpen={isNewSubOpen}
-            handleIsOpen={handleNewSub}
-            handleSubmit={subHandleSubmit}
-            formRef={subProcessesFormRef}
-            firstInputRef={subProcessesIdRef}
-            firstInputLabel={"Id: "}
-            secondInputRef={subProcessesDescRef}
-            secondInputLabel={"Description: "}
-            buttonText={"New Sub-process"}
+          <AddInfo
+            handleSubmit={newHandleSubmit}
+            firstInputLabel="Id"
+            secondInputLabel="Description"
+            buttonText="Add new sub-process"
+            index=""
           />
         </ProcessesContainer>
       </WorkflowContainer>

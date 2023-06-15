@@ -14,6 +14,7 @@ import {
   SaveButton,
   TableContainer,
   TableData,
+  TableRow,
   TableTitle,
   WorflowContainer,
 } from "./styled";
@@ -60,35 +61,35 @@ const WorkflowView = ({
             </InnerSection>
           </TableTitle>
           {!farmWorkflows.length ? (
-            <TableData>
-              <InnerSection style={{justifyContent: "center"}}>
+            <TableRow>
+              <TableData style={{justifyContent: "center"}}>
                 <Text>
                   No workflows yet. Start building your budget creating one.
                 </Text>
-              </InnerSection>
-            </TableData>
+              </TableData>
+            </TableRow>
           ) : (
             farmWorkflows.map((workflow) => {
               return (
-                <TableData key={workflow.id}>
-                  <InnerSection>
+                <TableRow key={workflow.id}>
+                  <TableData>
                     <Text>{workflow.id}</Text>
-                  </InnerSection>
-                  <InnerSection>
+                  </TableData>
+                  <TableData>
                     <Text>{workflow.crop}</Text>
-                  </InnerSection>
-                  <InnerSection>
+                  </TableData>
+                  <TableData>
                     <Text>{workflow.description}</Text>
-                  </InnerSection>
-                  <InnerSection>
+                  </TableData>
+                  <TableData>
                     <EditButton onClick={() => handleEdit(workflow.id)}>
                       <Edit2Icon size={18} />
                     </EditButton>
                     <DeleteButton onClick={() => handleDelete(workflow.id)}>
                       <Trash2 size={18} />
                     </DeleteButton>
-                  </InnerSection>
-                </TableData>
+                  </TableData>
+                </TableRow>
               );
             })
           )}

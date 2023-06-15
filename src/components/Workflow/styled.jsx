@@ -26,21 +26,30 @@ export const DarkButton = styled("button")`
   }
 `;
 
-export const TableContainer = styled.section`
+export const TableContainer = styled.table`
   border-radius: 5px;
   border: 1px solid #0d2329;
 `;
 
-export const TableTitle = styled.section`
+export const TableTitle = styled.tr`
   padding: 10px;
   display: flex;
   align-items: center;
   background-color: #0d2329;
   color: #f4f4f4;
   font-weight: bolder;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
 `;
 
-export const TableData = styled("section")`
+export const InnerSection = styled.th`
+  flex: 1 1 0px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+`;
+
+export const TableRow = styled.tr`
   padding: 10px;
   display: flex;
   flex-wrap: wrap;
@@ -48,7 +57,7 @@ export const TableData = styled("section")`
   border-top: 1px solid #0d2329;
 `;
 
-export const InnerSection = styled.div`
+export const TableData = styled.td`
   flex: 1 1 0px;
   display: flex;
   align-items: center;

@@ -5,33 +5,51 @@ import {
   PlusCircleIcon,
 } from "lucide-react";
 import {
-  ItemContainer,
   AddButton,
   FormSection,
   FormContainer,
   Label,
   Input,
+  InfoContainer,
 } from "../styled";
 import {Text} from "../../styled/styled";
+import {useState} from "react";
 
-const AddMoreActivity = ({
-  isOpen,
-  handleIsOpen,
+const AddInfo = ({
   handleSubmit,
-  firstInputValue,
-  firstInputOnChange,
-  firstInputName,
   firstInputLabel,
-  secondInputOnChange,
-  secondInputValue,
   secondInputLabel,
-  secondInputName,
   buttonText,
+  index,
 }) => {
+  const [isOpen, setIsOpen] = useState();
+  const [inputOne, setInputOne] = useState();
+  const [inputTwo, setInputTwo] = useState();
+
+  const inputOneChange = (e) => {
+    setInputOne(e.target.value);
+  };
+
+  const inputTwoChange = (e) => {
+    setInputTwo(e.target.value);
+  };
+
+  const handleForm = (e) => {
+    e.preventDefault();
+
+    const info = {
+      inputOne,
+      inputTwo,
+    };
+    handleSubmit(e, info, index);
+    setInputOne("");
+    setInputTwo("");
+  };
+
   return (
     <>
-      <ItemContainer>
-        <AddButton onClick={handleIsOpen}>
+      <InfoContainer>
+        <AddButton onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? (
             <ChevronDownSquare size={16} />
           ) : (
@@ -39,24 +57,16 @@ const AddMoreActivity = ({
           )}
           <Text style={{fontSize: "14px"}}>{buttonText}</Text>
         </AddButton>
-      </ItemContainer>
+      </InfoContainer>
       {isOpen && (
-        <FormContainer style={{paddingBottom: "8px"}} onSubmit={handleSubmit}>
+        <FormContainer style={{paddingBottom: "8px"}} onSubmit={handleForm}>
           <FormSection>
             <Label htmlFor="subId">{firstInputLabel}</Label>
-            <Input
-              name={firstInputName}
-              value={firstInputValue}
-              onChange={firstInputOnChange}
-            />
+            <Input value={inputOne} onChange={inputOneChange} required />
           </FormSection>
           <FormSection>
             <Label htmlFor="subDesc">{secondInputLabel}</Label>
-            <Input
-              name={secondInputName}
-              value={secondInputValue}
-              onChange={secondInputOnChange}
-            />
+            <Input value={inputTwo} onChange={inputTwoChange} required />
           </FormSection>
           <AddButton type="submit">
             <PlusCircleIcon />
@@ -67,4 +77,4 @@ const AddMoreActivity = ({
   );
 };
 
-export default AddMoreActivity;
+export default AddInfo;

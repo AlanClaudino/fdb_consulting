@@ -18,11 +18,18 @@ export const WorkflowContainer = styled.section`
   flex-direction: column;
 `;
 
-export const CropContainer = styled.div`
+export const InfoContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px;
+`;
+
+export const ItemContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
-  padding-bottom: 8px;
 `;
 
 export const ProcessesContainer = styled.section`
@@ -35,14 +42,6 @@ export const ActivitiesContainer = styled.section`
   padding-left: 30px;
   display: flex;
   flex-direction: column;
-`;
-
-export const ItemContainer = styled.div`
-  border-top: 1px solid #0d2329;
-  display: flex;
-  align-items: center;
-  padding: 8px 0;
-  gap: 10px;
 `;
 
 export const FormContainer = styled.form`
@@ -72,6 +71,18 @@ export const CategoryText = styled.h3`
 `;
 
 export const AddButton = styled.button`
+  border: none;
+  background-color: inherit;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  &:hover {
+    cursor: pointer;
+    color: #4dd467;
+  }
+`;
+
+export const SaveEditButton = styled.button`
   border: none;
   background-color: inherit;
   display: flex;
