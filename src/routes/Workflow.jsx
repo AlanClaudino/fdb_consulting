@@ -11,13 +11,7 @@ const Workflow = () => {
   const cropRef = useRef();
   const descriptionRef = useRef();
 
-  const {
-    farm,
-    createWorkflow,
-    getSelectedWorkflow,
-    deleteWorkflow,
-    getFarmWorkflows,
-  } = useDbContext();
+  const {createWorkflow, getSelectedWorkflow, deleteWorkflow} = useDbContext();
   const navigate = useNavigate();
 
   const handleNewWorkflow = () => {
@@ -56,7 +50,6 @@ const Workflow = () => {
   const handleDelete = async (id) => {
     try {
       await deleteWorkflow(id);
-      getFarmWorkflows(farm.id);
     } catch (error) {
       console.log(error);
       setError("Failed to delete the workflow. Please, try again.");

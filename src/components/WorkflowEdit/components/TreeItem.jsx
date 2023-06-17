@@ -10,7 +10,7 @@ import {
   SaveEditButton,
 } from "../styled";
 import {
-  CheckSquareIcon,
+  CheckIcon,
   ChevronRightSquare,
   Edit2Icon,
   MinusSquareIcon,
@@ -81,7 +81,7 @@ const TreeItem = ({
             </FormSection>
             <FormSection>
               <SaveEditButton type="submit">
-                <CheckSquareIcon size={18} />
+                <CheckIcon size={18} />
               </SaveEditButton>
             </FormSection>
           </FormContainer>

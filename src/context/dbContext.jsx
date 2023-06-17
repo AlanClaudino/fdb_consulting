@@ -53,8 +53,6 @@ const DatabaseContext = ({children}) => {
       (farm) => farm.id === selectedFarmId
     );
     setFarm(selectedFarm);
-    getFarmWorkflows(selectedFarmId);
-    setWorkflow(null);
   };
 
   const createFarm = async (farmInfo) => {
@@ -90,6 +88,13 @@ const DatabaseContext = ({children}) => {
     }
   };
 
+  const getSelectedWorkflow = async (workflowId) => {
+    const [selectedWorkflow] = farmWorkflows.filter(
+      (workflow) => workflow.id === workflowId
+    );
+    setWorkflow(selectedWorkflow);
+  };
+
   const createWorkflow = async (workflowInfo) => {
     const workflowSubcollectionRef = collection(
       db,
@@ -105,13 +110,6 @@ const DatabaseContext = ({children}) => {
     }
   };
 
-  const getSelectedWorkflow = async (workflowId) => {
-    const [selectedWorkflow] = farmWorkflows.filter(
-      (workflow) => workflow.id === workflowId
-    );
-    setWorkflow(selectedWorkflow);
-  };
-
   const updateWorkflow = async (workflowInfo) => {
     const workflowDocRef = doc(
       db,
@@ -123,7 +121,7 @@ const DatabaseContext = ({children}) => {
     console.log("UPDATED");
     try {
       await updateDoc(workflowDocRef, workflowInfo);
-      return "Workflow Successfully updated.";
+      return "Workflow successfully updated.";
     } catch (error) {
       console.log(error);
       return error;

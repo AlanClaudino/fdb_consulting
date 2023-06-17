@@ -21,6 +21,8 @@ import {
 import {ErrorMessage, SubTitle, Text, Title} from "../styled/styled";
 import {Edit2Icon, PlusIcon, Trash2} from "lucide-react";
 import {useDbContext} from "../../context/dbContext";
+import {useEffect, useState} from "react";
+import loading from "../../assets/loading.gif";
 
 const WorkflowView = ({
   isOpen,
@@ -34,67 +36,89 @@ const WorkflowView = ({
   handleEdit,
   handleDelete,
 }) => {
-  const {farmWorkflows} = useDbContext();
+  const {farmWorkflows, getFarmWorkflows, farm} = useDbContext();
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const getWorkflows = async () => {
+      await getFarmWorkflows(farm.id);
+      setIsLoading(false);
+    };
+    getWorkflows();
+  }, [farm, getFarmWorkflows]);
 
   return (
     <>
-      <WorflowContainer>
-        <Title style={{textAlign: "start"}}>Production Systems</Title>
-        <section>
-          <DarkButton onClick={handleNewWorkflow}>
-            <PlusIcon size={16} /> Create new Workflow
-          </DarkButton>
-        </section>
-        <TableContainer>
-          <TableTitle>
-            <InnerSection>
-              <Text>Id</Text>
-            </InnerSection>
-            <InnerSection>
-              <Text>Crop</Text>
-            </InnerSection>
-            <InnerSection>
-              <Text>Description</Text>
-            </InnerSection>
-            <InnerSection>
-              <Text>Manage</Text>
-            </InnerSection>
-          </TableTitle>
-          {!farmWorkflows.length ? (
-            <TableRow>
-              <TableData style={{justifyContent: "center"}}>
-                <Text>
-                  No workflows yet. Start building your budget creating one.
-                </Text>
-              </TableData>
-            </TableRow>
-          ) : (
-            farmWorkflows.map((workflow) => {
-              return (
-                <TableRow key={workflow.id}>
-                  <TableData>
-                    <Text>{workflow.id}</Text>
-                  </TableData>
-                  <TableData>
-                    <Text>{workflow.crop}</Text>
-                  </TableData>
-                  <TableData>
-                    <Text>{workflow.description}</Text>
-                  </TableData>
-                  <TableData>
-                    <EditButton onClick={() => handleEdit(workflow.id)}>
-                      <Edit2Icon size={18} />
-                    </EditButton>
-                    <DeleteButton onClick={() => handleDelete(workflow.id)}>
-                      <Trash2 size={18} />
-                    </DeleteButton>
-                  </TableData>
-                </TableRow>
-              );
-            })
-          )}
-        </TableContainer>
-      </WorflowContainer>
+      {isLoading ? (
+        <div>
+          <img
+            src={loading}
+            alt="Teste"
+            style={{
+              maxWidth: "500px",
+              height: "auto",
+            }}
+          />
+        </div>
+      ) : (
+        <WorflowContainer>
+          <Title style={{textAlign: "start"}}>Production Systems</Title>
+          <section>
+            <DarkButton onClick={handleNewWorkflow}>
+              <PlusIcon size={16} /> Create new Workflow
+            </DarkButton>
+          </section>
+          <TableContainer>
+            <TableTitle>
+              <InnerSection>
+                <Text>Id</Text>
+              </InnerSection>
+              <InnerSection>
+                <Text>Crop</Text>
+              </InnerSection>
+              <InnerSection>
+                <Text>Description</Text>
+              </InnerSection>
+              <InnerSection>
+                <Text>Manage</Text>
+              </InnerSection>
+            </TableTitle>
+            {!farmWorkflows.length ? (
+              <TableRow>
+                <TableData style={{justifyContent: "center"}}>
+                  <Text>
+                    No workflows yet. Start building your budget creating one.
+                  </Text>
+                </TableData>
+              </TableRow>
+            ) : (
+              farmWorkflows.map((workflow) => {
+                return (
+                  <TableRow key={workflow.id}>
+                    <TableData>
+                      <Text>{workflow.id}</Text>
+                    </TableData>
+                    <TableData>
+                      <Text>{workflow.crop}</Text>
+                    </TableData>
+                    <TableData>
+                      <Text>{workflow.description}</Text>
+                    </TableData>
+                    <TableData>
+                      <EditButton onClick={() => handleEdit(workflow.id)}>
+                        <Edit2Icon size={18} />
+                      </EditButton>
+                      <DeleteButton onClick={() => handleDelete(workflow.id)}>
+                        <Trash2 size={18} />
+                      </DeleteButton>
+                    </TableData>
+                  </TableRow>
+                );
+              })
+            )}
+          </TableContainer>
+        </WorflowContainer>
+      )}
       {isOpen && (
         <Overlay>
           <FormContainer>

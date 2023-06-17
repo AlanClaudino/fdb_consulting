@@ -1,3 +1,4 @@
+import {Link} from "react-router-dom";
 import styled from "styled-components";
 
 export const EditWorkflowContainer = styled.div`
@@ -158,7 +159,7 @@ export const SuccessMessage = styled("p")`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 400px;
+  max-width: 800px;
   font-size: 16px;
   font-family: "Lato", sans-serif;
   padding: 10px;
@@ -169,7 +170,7 @@ export const SuccessMessage = styled("p")`
 `;
 
 export const CloseButton = styled.button`
-  color: #546254;
+  color: #0d2329;
   margin: none;
   padding: none;
   background-color: inherit;
@@ -191,4 +192,13 @@ export const ErrorMessage = styled("p")`
   background-color: rgb(250, 250, 250);
   color: #0d2329;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+`;
+
+export const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: #01ae57;
+  &:hover {
+    color: #00cc66;
+    cursor: pointer;
+  }
 `;

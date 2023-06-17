@@ -29,13 +29,8 @@ const Sidebar = ({
   farmMenuRef,
   selectButtonRef,
 }) => {
-  const {userFarms, farm, getFarmWorkflows} = useDbContext();
+  const {userFarms, farm} = useDbContext();
   const navigate = useNavigate();
-
-  const navigateWorkflow = async () => {
-    await getFarmWorkflows(farm.id);
-    navigate("/farm/workflow");
-  };
 
   return (
     <StyledSidebar>
@@ -53,7 +48,7 @@ const Sidebar = ({
         <SideCalendarIcon />
         <StyledSidebarText>Dashboard</StyledSidebarText>
       </StyledSidebarItem>
-      <StyledSidebarItem onClick={navigateWorkflow}>
+      <StyledSidebarItem onClick={() => navigate("/farm/workflow")}>
         <SideWorkflowIcon />
         <StyledSidebarText>Workflow</StyledSidebarText>
       </StyledSidebarItem>

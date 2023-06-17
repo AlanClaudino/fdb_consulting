@@ -45,6 +45,7 @@ const Header = () => {
     navigate("/profile");
     setIsOpen(false);
   };
+
   useEffect(() => {
     const handleClick = (e) => {
       if (!menuRef.current.contains(e.target)) {
