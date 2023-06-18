@@ -24,10 +24,10 @@ const TreeItem = ({
   isClickable,
   category,
   handleClick,
-  handleDelete,
+  handleDeleteButton,
   itemOne,
   itemTwo,
-  handleForm,
+  handleEditButton,
 }) => {
   const [inputOne, setInputOne] = useState(itemOne);
   const [inputTwo, setInputTwo] = useState(itemTwo);
@@ -53,8 +53,12 @@ const TreeItem = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleForm(inputOne, inputTwo);
+    handleEditButton(inputOne, inputTwo);
     setIsEditing(false);
+  };
+
+  const handleDelete = () => {
+    handleDeleteButton();
   };
 
   return (
@@ -74,7 +78,12 @@ const TreeItem = ({
         {isEditing ? (
           <FormContainer onSubmit={handleSubmit}>
             <FormSection>
-              <Input value={inputOne} onChange={inputOneChange} required />
+              <Input
+                value={inputOne}
+                onChange={inputOneChange}
+                required
+                disabled
+              />
             </FormSection>
             <FormSection>
               <Input value={inputTwo} onChange={inputTwoChange} required />

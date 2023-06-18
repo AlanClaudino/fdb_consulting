@@ -24,9 +24,8 @@ const EditWorkflowView = () => {
   const navigate = useNavigate();
 
   const [subProcesses, setSubProcesses] = useState(workflow.subProcesses);
-  const [viewSubProcesses, setViewSubProcesses] = useState(
-    workflow.subProcesses
-  );
+  const [subCount, setSubCount] = useState(workflow.subCount);
+  const [viewSubProcesses, setViewSubProcesses] = useState(true);
   const [crop, setCrop] = useState(workflow.crop);
   const [subProcessControl, setsubProcessControl] = useState([]);
   const [error, setError] = useState("");
@@ -34,22 +33,24 @@ const EditWorkflowView = () => {
 
   useEffect(() => {
     const newControl = [];
-    subProcesses.forEach(() => {
+    subProcesses.forEach((item) => {
       newControl.push({
-        ActivitiesIsOpen: false,
+        activitiesIsOpen: false,
+        id: item.id,
       });
     });
     setsubProcessControl(newControl);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const newHandleSubmit = (e, info) => {
+  const newSubprocessSubmit = (info) => {
     if (message) setMessage("");
 
     const newSubpro = {
       id: info.inputOne,
       description: info.inputTwo,
       activities: [],
+      activitiesNumber: 0,
     };
     const newSubProcesses = [...subProcesses, newSubpro];
     setSubProcesses(newSubProcesses);
@@ -57,32 +58,66 @@ const EditWorkflowView = () => {
     const newControl = [...subProcessControl];
     newControl.push({
       ActivitiesIsOpen: false,
+      id: info.inputOne,
     });
     setsubProcessControl(newControl);
+    setSubCount(subCount + 1);
   };
 
-  const newHandleActivitySubmit = (evt, info, index) => {
+  const newActivitySubmit = (info, id) => {
     const newActivity = {
       id: info.inputOne,
       description: info.inputTwo,
     };
 
-    const data = [...subProcesses];
-    data[index].activities.push(newActivity);
+    const data = subProcesses.map((subPro) => {
+      if (subPro.id == id) {
+        subPro.activities.push(newActivity);
+        subPro.activitiesNumber++;
+
+        return subPro;
+      }
+      return subPro;
+    });
     setSubProcesses(data);
   };
 
-  const editActivity = (inputOne, inputTwo, index, actIndex) => {
-    const data = [...subProcesses];
-    data[index].activities[actIndex].id = inputOne;
-    data[index].activities[actIndex].description = inputTwo;
+  const viewActivities = (id) => {
+    const newControl = subProcessControl.map((subProc) => {
+      if (subProc.id == id) {
+        return {...subProc, activitiesIsOpen: !subProc.activitiesIsOpen};
+      }
+
+      return subProc;
+    });
+
+    setsubProcessControl(newControl);
+  };
+
+  const editActivity = (inputOne, inputTwo, subProcId, ActvId) => {
+    const data = subProcesses.map((subProc) => {
+      if (subProc.id == subProcId) {
+        subProc.activities.map((activity) => {
+          if (activity.id == ActvId) {
+            activity.description = inputTwo;
+          }
+          return activity;
+        });
+      }
+
+      return subProc;
+    });
+
     setSubProcesses(data);
   };
 
-  const editSubprocess = (inputOne, inputTwo, index) => {
-    const data = [...subProcesses];
-    data[index].id = inputOne;
-    data[index].description = inputTwo;
+  const editSubprocess = (inputOne, inputTwo, id) => {
+    const data = subProcesses.map((subProc) => {
+      if (subProc.id == id) {
+        return {...subProc, description: inputTwo};
+      }
+      return subProc;
+    });
     setSubProcesses(data);
   };
 
@@ -90,10 +125,24 @@ const EditWorkflowView = () => {
     setCrop(inputTwo);
   };
 
-  const handleActivityList = (index) => {
-    const newControl = [...subProcessControl];
-    newControl[index].ActivitiesIsOpen = !newControl[index].ActivitiesIsOpen;
-    setsubProcessControl(newControl);
+  const deleteSubprocess = (id) => {
+    if (message) setMessage("");
+    const newSubProcesses = subProcesses.filter((item) => item.id != id);
+    setSubProcesses(newSubProcesses);
+  };
+
+  const deleteActivity = (subProcId, ActvId) => {
+    const data = subProcesses.map((subProc) => {
+      if (subProc.id == subProcId) {
+        const newActivities = subProc.activities.filter(
+          (activity) => activity.id != ActvId
+        );
+        return {...subProc, activities: newActivities};
+      }
+      return subProc;
+    });
+
+    setSubProcesses(data);
   };
 
   const handleSave = async () => {
@@ -101,6 +150,7 @@ const EditWorkflowView = () => {
     const info = {
       crop: crop,
       subProcesses: subProcesses,
+      subCount: subCount,
     };
     try {
       const update = await updateWorkflow(info);
@@ -147,26 +197,32 @@ const EditWorkflowView = () => {
           category={"Crop"}
           itemOne={"001"}
           itemTwo={crop}
-          handleForm={editCrop}
+          handleEditButton={editCrop}
         />
         {viewSubProcesses && (
           <ProcessesContainer>
-            {subProcesses?.map((item, index) => {
+            {subProcesses?.map((subProcess) => {
               return (
-                <section key={item.id}>
+                <section key={subProcess.id}>
                   <TreeItem
                     isClickable={true}
                     category={"Sub-Process"}
-                    itemOne={item.id}
-                    itemTwo={item.description}
-                    handleClick={() => handleActivityList(index)}
-                    handleForm={(inputOne, inputTwo) =>
-                      editSubprocess(inputOne, inputTwo, index)
+                    itemOne={subProcess.id}
+                    itemTwo={subProcess.description}
+                    handleClick={() => viewActivities(subProcess.id)}
+                    handleEditButton={(inputOne, inputTwo) =>
+                      editSubprocess(inputOne, inputTwo, subProcess.id)
                     }
+                    handleDeleteButton={() => deleteSubprocess(subProcess.id)}
                   />
-                  {subProcessControl[index]?.ActivitiesIsOpen && (
+                  {subProcessControl.reduce((id, subProc) => {
+                    if (id == subProc.id) {
+                      return subProc.activitiesIsOpen;
+                    }
+                    return id;
+                  }, subProcess.id) && (
                     <ActivitiesContainer>
-                      {item.activities.map((activity, actIndex) => {
+                      {subProcess.activities.map((activity) => {
                         return (
                           <>
                             <TreeItem
@@ -176,13 +232,16 @@ const EditWorkflowView = () => {
                               category={"Activity"}
                               itemOne={activity.id}
                               itemTwo={activity.description}
-                              handleForm={(inputOne, inputTwo) =>
+                              handleEditButton={(inputOne, inputTwo) =>
                                 editActivity(
                                   inputOne,
                                   inputTwo,
-                                  index,
-                                  actIndex
+                                  subProcess.id,
+                                  activity.id
                                 )
+                              }
+                              handleDeleteButton={() =>
+                                deleteActivity(subProcess.id, activity.id)
                               }
                             />
                           </>
@@ -190,11 +249,15 @@ const EditWorkflowView = () => {
                       })}
 
                       <AddInfo
-                        handleSubmit={newHandleActivitySubmit}
+                        handleSubmit={(info) =>
+                          newActivitySubmit(info, subProcess.id)
+                        }
                         firstInputLabel="Id"
                         secondInputLabel="Description"
                         buttonText="Add new activity"
-                        index={index}
+                        valueOne={String(
+                          subProcess.activitiesNumber + 1
+                        ).padStart(3, "0")}
                       />
                     </ActivitiesContainer>
                   )}
@@ -202,11 +265,11 @@ const EditWorkflowView = () => {
               );
             })}
             <AddInfo
-              handleSubmit={newHandleSubmit}
+              handleSubmit={newSubprocessSubmit}
               firstInputLabel="Id"
               secondInputLabel="Description"
               buttonText="Add new sub-process"
-              index=""
+              valueOne={String(subCount + 1).padStart(3, "0")}
             />
           </ProcessesContainer>
         )}

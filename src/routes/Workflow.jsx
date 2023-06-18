@@ -31,6 +31,7 @@ const Workflow = () => {
       crop: cropRef.current.value,
       description: descriptionRef.current.value,
       subProcesses: [],
+      subCount: 0,
     };
 
     try {

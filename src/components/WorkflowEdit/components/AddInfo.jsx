@@ -13,18 +13,24 @@ import {
   InfoContainer,
 } from "../styled";
 import {Text} from "../../styled/styled";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 const AddInfo = ({
   handleSubmit,
   firstInputLabel,
   secondInputLabel,
   buttonText,
-  index,
+  valueOne,
+  valueTwo,
 }) => {
   const [isOpen, setIsOpen] = useState();
-  const [inputOne, setInputOne] = useState();
-  const [inputTwo, setInputTwo] = useState();
+  const [inputOne, setInputOne] = useState("");
+  const [inputTwo, setInputTwo] = useState("");
+
+  useEffect(() => {
+    if (valueOne) setInputOne(valueOne);
+    if (valueTwo) setInputTwo(valueTwo);
+  }, [valueOne, valueTwo]);
 
   const inputOneChange = (e) => {
     setInputOne(e.target.value);
@@ -41,7 +47,7 @@ const AddInfo = ({
       inputOne,
       inputTwo,
     };
-    handleSubmit(e, info, index);
+    handleSubmit(info, e);
     setInputOne("");
     setInputTwo("");
   };
@@ -62,11 +68,21 @@ const AddInfo = ({
         <FormContainer style={{paddingBottom: "8px"}} onSubmit={handleForm}>
           <FormSection>
             <Label htmlFor="subId">{firstInputLabel}</Label>
-            <Input value={inputOne} onChange={inputOneChange} required />
+            <Input
+              value={inputOne}
+              onChange={inputOneChange}
+              required
+              disabled={valueOne ? true : false}
+            />
           </FormSection>
           <FormSection>
             <Label htmlFor="subDesc">{secondInputLabel}</Label>
-            <Input value={inputTwo} onChange={inputTwoChange} required />
+            <Input
+              value={inputTwo}
+              onChange={inputTwoChange}
+              required
+              disabled={valueTwo ? true : false}
+            />
           </FormSection>
           <AddButton type="submit">
             <PlusCircleIcon />

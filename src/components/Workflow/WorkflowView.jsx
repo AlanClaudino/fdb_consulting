@@ -127,11 +127,11 @@ const WorkflowView = ({
             <Form onSubmit={handleSubmit} ref={formRef}>
               <FormSection>
                 <Label>Crop</Label>
-                <Input ref={cropRef} />
+                <Input ref={cropRef} required />
               </FormSection>
               <FormSection>
                 <Label>Description</Label>
-                <Input ref={descriptionRef} />
+                <Input ref={descriptionRef} required />
               </FormSection>
               <FormSection
                 style={{textAlign: "center", backgroundColor: "#fafafa"}}
