@@ -202,3 +202,29 @@ export const StyledLink = styled(Link)`
     cursor: pointer;
   }
 `;
+
+export const Overlay = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(13, 45, 51, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const ConfirmContainer = styled.div`
+  flex-grow: 1;
+  display: flex;
+  gap: 15px;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 20px;
+  background-color: #fafafa;
+  max-width: 500px;
+  padding: 20px;
+`;

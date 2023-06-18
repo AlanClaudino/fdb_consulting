@@ -1,4 +1,3 @@
-import {useDbContext} from "../context/dbContext";
 import DashboardView from "../components/Dashboard/DashboardView";
 
 const Dashboard = () => {
