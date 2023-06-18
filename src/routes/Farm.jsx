@@ -1,4 +1,4 @@
-import {Navigate, Outlet} from "react-router-dom";
+import {Navigate, Outlet, useNavigate} from "react-router-dom";
 import Sidebar from "../components/Sidebar/Sidebar.jsx";
 import {RowContainer} from "../components/styled/styled.jsx";
 import {useDbContext} from "../context/dbContext.jsx";
@@ -13,6 +13,7 @@ const Farm = () => {
   const {farm, getSelectedFarm} = useDbContext();
   const farmMenuRef = useRef();
   const selectButtonRef = useRef();
+  const navigate = useNavigate();
 
   const handleMenuSelect = () => {
     setIsOpen(!isOpen);
@@ -21,6 +22,7 @@ const Farm = () => {
   const handleFarmSelect = (farmId) => {
     getSelectedFarm(farmId);
     setIsOpen(false);
+    navigate("/farm");
   };
 
   useEffect(() => {

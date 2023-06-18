@@ -160,15 +160,3 @@ const DatabaseContext = ({children}) => {
 };
 
 export default DatabaseContext;
-
-// await addDoc(collectionRef, {
-//   name: "teste SubCol",
-//   age: 32,
-// });
-
-// setDoc(docRef, {
-//   name: "Alan updated",
-//   desc: "updating existing doc",
-// });
-
-// return getDocs(collectionRef);
