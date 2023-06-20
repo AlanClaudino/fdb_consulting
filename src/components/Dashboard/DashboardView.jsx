@@ -53,7 +53,7 @@ const DashboardView = () => {
                 </IconWrapper>
                 <SubTitle>Workflow</SubTitle>
               </DashboardOptions>
-              <DashboardOptions>
+              <DashboardOptions onClick={() => navigate("machinery")}>
                 <IconWrapper background="#3B2C35">
                   <WorkShopIcon />
                 </IconWrapper>

@@ -52,7 +52,7 @@ const Sidebar = ({
         <SideWorkflowIcon />
         <StyledSidebarText>Workflow</StyledSidebarText>
       </StyledSidebarItem>
-      <StyledSidebarItem>
+      <StyledSidebarItem onClick={() => navigate("/farm/machinery")}>
         <SideMachineryIcon />
         <StyledSidebarText>Machinery</StyledSidebarText>
       </StyledSidebarItem>

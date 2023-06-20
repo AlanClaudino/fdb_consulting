@@ -24,6 +24,7 @@ const DatabaseContext = ({children}) => {
   const [workflow, setWorkflow] = useState();
   const [userFarms, setuserFarms] = useState();
   const [farmWorkflows, setFarmWorkflows] = useState();
+  const [farmEquip, setFarmEquip] = useState();
 
   const farmsCollectionRef = collection(db, "Farms");
 
@@ -137,6 +138,46 @@ const DatabaseContext = ({children}) => {
     }
   };
 
+  const createEquipGroup = async (info) => {
+    const equipGroupSubcollectionRef = collection(
+      db,
+      "Farms",
+      farm?.id,
+      "equipments"
+    );
+    try {
+      await addDoc(equipGroupSubcollectionRef, info);
+      await getFarmEquipments();
+    } catch (error) {
+      return error;
+    }
+  };
+
+  const getFarmEquipments = async () => {
+    const equipGroup = [];
+    const equipGroupSubcollectionRef = collection(
+      db,
+      "Farms",
+      farm?.id,
+      "equipments"
+    );
+    try {
+      const equipQuery = query(equipGroupSubcollectionRef);
+
+      //const farmDocs = await getDocs(farmQuery);
+      const farmDocs = await getDocs(equipQuery);
+
+      farmDocs.forEach((doc) => {
+        const equip = {id: doc.id, ...doc.data()};
+        equipGroup.push(equip);
+      });
+
+      setFarmEquip(equipGroup);
+    } catch (error) {
+      return error;
+    }
+  };
+
   return (
     <dbContext.Provider
       value={{
@@ -144,6 +185,7 @@ const DatabaseContext = ({children}) => {
         userFarms,
         workflow,
         farmWorkflows,
+        farmEquip,
         createFarm,
         getUserFarms,
         getSelectedFarm,
@@ -152,6 +194,8 @@ const DatabaseContext = ({children}) => {
         getSelectedWorkflow,
         updateWorkflow,
         deleteWorkflow,
+        createEquipGroup,
+        getFarmEquipments,
       }}
     >
       {children}

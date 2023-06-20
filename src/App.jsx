@@ -12,6 +12,7 @@ import Project from "./routes/Project";
 import RegisterFarm from "./routes/RegisterFarm";
 import Workflow from "./routes/Workflow";
 import EditWorkflow from "./routes/EditWorkflow";
+import Machinery from "./routes/machinery";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
               <Route index element={<Dashboard />} />
               <Route path="workflow" element={<Workflow />} />
               <Route path="edit-workflow" element={<EditWorkflow />} />
+              <Route path="machinery" element={<Machinery />} />
             </Route>
           </Route>
         </Route>
