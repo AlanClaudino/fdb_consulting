@@ -1,44 +1,44 @@
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import {Link} from "react-router-dom";
+import styled from "styled-components";
 
-export const RowContainer = styled('div')`
+export const RowContainer = styled("div")`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: ${(props) => (props.height ? props.height : 'auto')};
-  background: ${(props) => (props.background ? props.background : 'inherit')};
+  height: ${(props) => (props.height ? props.height : "auto")};
+  background: ${(props) => (props.background ? props.background : "inherit")};
 `;
 
-export const ColumnContainer = styled('div')`
+export const ColumnContainer = styled("div")`
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  height: ${(props) => (props.height ? props.height : 'auto')};
-  background: ${(props) => (props.background ? props.background : 'inherit')};
+  height: ${(props) => (props.height ? props.height : "auto")};
+  background: ${(props) => (props.background ? props.background : "inherit")};
 `;
 
-export const Title = styled('h1')`
-  color: ${(props) => (props.color ? props.color : '#0d2329')};
+export const Title = styled("h1")`
+  color: ${(props) => (props.color ? props.color : "#0d2329")};
   font-size: 32px;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   text-align: center;
 `;
 
-export const SubTitle = styled('h2')`
-  color: ${(props) => (props.color ? props.color : '#0d2329')};
+export const SubTitle = styled("h2")`
+  color: ${(props) => (props.color ? props.color : "#0d2329")};
   font-size: 24px;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   text-align: center;
   font-weight: 600;
 `;
 
-export const Input = styled('input')`
+export const Input = styled("input")`
   color: #0d2329;
   background: none;
   padding: 8px 16px;
   font-size: 16px;
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   border: none;
   border-bottom: 2px solid #0d2329;
   margin: 10px;
@@ -54,7 +54,7 @@ export const Input = styled('input')`
   }
 `;
 
-export const DarkButton = styled('button')`
+export const DarkButton = styled("button")`
   background-color: #0d2329;
   color: #fff;
   width: 70%;
@@ -84,25 +84,25 @@ export const LightButton = styled.button`
   }
 `;
 
-export const Text = styled('p')`
-  color: ${(props) => (props.color ? props.color : 'inherit')};
+export const Text = styled("p")`
+  color: ${(props) => (props.color ? props.color : "inherit")};
   font-size: 16px;
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   text-align: justify;
 `;
 
 export const StyledLink = styled(Link)`
   text-decoration: none;
-  color: ${(props) => (props.color ? props.color : '#4dd467')};
+  color: ${(props) => (props.color ? props.color : "#4dd467")};
   &:hover {
     color: #0d2329;
     cursor: pointer;
   }
 `;
 
-export const ErrorMessage = styled('p')`
+export const ErrorMessage = styled("p")`
   font-size: 16px;
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   padding: 10px;
   border-left: 10px solid #ff3333;
   background-color: rgb(250, 250, 250);
@@ -110,9 +110,9 @@ export const ErrorMessage = styled('p')`
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 `;
 
-export const SuccessMessage = styled('p')`
+export const SuccessMessage = styled("p")`
   font-size: 16px;
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   padding: 10px;
   border-left: 10px solid #4bb543;
   background-color: rgb(250, 250, 250);
@@ -120,7 +120,7 @@ export const SuccessMessage = styled('p')`
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 `;
 
-export const ModalSuccess = styled('dialog')`
+export const ModalSuccess = styled("dialog")`
   border: none;
   border-left: 10px solid #4bb543;
   background-color: rgb(250, 250, 250);

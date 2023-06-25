@@ -20,10 +20,10 @@ export const useDbContext = () => {
 
 // eslint-disable-next-line react/prop-types
 const DatabaseContext = ({children}) => {
-  const [farm, setFarm] = useState();
-  const [workflow, setWorkflow] = useState();
   const [userFarms, setuserFarms] = useState();
+  const [farm, setFarm] = useState();
   const [farmWorkflows, setFarmWorkflows] = useState();
+  const [workflow, setWorkflow] = useState();
   const [farmEquip, setFarmEquip] = useState();
 
   const farmsCollectionRef = collection(db, "Farms");
@@ -54,6 +54,9 @@ const DatabaseContext = ({children}) => {
       (farm) => farm.id === selectedFarmId
     );
     setFarm(selectedFarm);
+    setFarmWorkflows(null);
+    setWorkflow(null);
+    setFarmEquip(null);
   };
 
   const createFarm = async (farmInfo) => {
@@ -145,10 +148,18 @@ const DatabaseContext = ({children}) => {
       farm?.id,
       "equipments"
     );
+    await addDoc(equipGroupSubcollectionRef, info);
+    await getFarmEquipments();
+  };
+
+  const updateEquipGroup = async (equipGroupInfo, id) => {
+    const GroupDocRef = doc(db, "Farms", farm?.id, "equipments", id);
+    console.log("UPDATED");
     try {
-      await addDoc(equipGroupSubcollectionRef, info);
-      await getFarmEquipments();
+      await updateDoc(GroupDocRef, equipGroupInfo);
+      return "Machinery and Equipments successfully updated.";
     } catch (error) {
+      console.log(error);
       return error;
     }
   };
@@ -162,10 +173,7 @@ const DatabaseContext = ({children}) => {
       "equipments"
     );
     try {
-      const equipQuery = query(equipGroupSubcollectionRef);
-
-      //const farmDocs = await getDocs(farmQuery);
-      const farmDocs = await getDocs(equipQuery);
+      const farmDocs = await getDocs(equipGroupSubcollectionRef);
 
       farmDocs.forEach((doc) => {
         const equip = {id: doc.id, ...doc.data()};
@@ -196,6 +204,7 @@ const DatabaseContext = ({children}) => {
         deleteWorkflow,
         createEquipGroup,
         getFarmEquipments,
+        updateEquipGroup,
       }}
     >
       {children}
