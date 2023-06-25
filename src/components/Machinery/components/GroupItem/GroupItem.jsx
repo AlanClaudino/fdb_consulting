@@ -16,9 +16,9 @@ import {
   InfoContainer,
   Input,
   ItemContainer,
-} from "../styled";
+} from "./styled";
 import {useState} from "react";
-import {Text} from "../../styled/styled";
+import {Text} from "../../../styled/styled";
 
 const GroupItem = ({isOpen, handleClick, value, handleForm, id}) => {
   const [isEditing, setIsEditing] = useState();

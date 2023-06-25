@@ -6,7 +6,7 @@ import {
   FormSection,
   Input,
   Label,
-} from "../styled";
+} from "./styled";
 
 // eslint-disable-next-line react/prop-types
 const AddGroup = ({handleForm}) => {

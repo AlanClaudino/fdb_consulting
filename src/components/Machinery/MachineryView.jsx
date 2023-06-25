@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {useDbContext} from "../../context/dbContext";
 import {Text, Title} from "../styled/styled";
-import AddGroup from "./components/AddGroup";
+import AddGroup from "./components/AddGroup/AddGroup";
 import {
   EquipContainer,
   ErrorMessage,
@@ -9,7 +9,7 @@ import {
   MachineryContainer,
   NewGroupContainer,
 } from "./styled";
-import GroupItem from "./components/GroupItem";
+import GroupItem from "./components/GroupItem/GroupItem";
 import loading from "../../assets/loading.gif";
 import AddEquip from "./components/AddEquip/AddEquip";
 import EquipItem from "./components/EquipItem/EquipItem";
