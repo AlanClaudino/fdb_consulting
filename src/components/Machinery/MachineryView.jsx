@@ -30,6 +30,7 @@ const MachineryView = () => {
       setIsLoading(false);
     };
     getEquip();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -96,6 +97,41 @@ const MachineryView = () => {
     setFarmEquipmentes(data);
   };
 
+  const editGroupDesc = (value, id) => {
+    console.log(value);
+    console.log(id);
+    const data = farmEquipmentes.map((group) => {
+      if (group.id === id) {
+        const newGroup = {...group, description: value};
+        return newGroup;
+      }
+      return group;
+    });
+
+    setFarmEquipmentes(data);
+  };
+
+  const editEquipInfo = (info, id, equipId) => {
+    const data = farmEquipmentes.map((group) => {
+      if (group.id === id) {
+        const editEquip = group.equipment.map((equip) => {
+          if (equip.id == equipId) {
+            equip.id = equipId;
+            equip.description = info.valueTwo;
+            equip.unit = info.valueThree;
+            equip.cost = info.valueFour;
+          }
+          return equip;
+        });
+        const newGroup = {...group, equipment: editEquip};
+        return newGroup;
+      }
+      return group;
+    });
+
+    setFarmEquipmentes(data);
+  };
+
   return (
     <>
       {isLoading ? (
@@ -150,6 +186,7 @@ const MachineryView = () => {
                             handleGroupExpand(evt, group.id)
                           }
                           id={group.id}
+                          handleForm={(info) => editGroupDesc(info, group.id)}
                         />
                         {group.isOpen && (
                           <>
@@ -161,6 +198,9 @@ const MachineryView = () => {
                                   inputTwo={equip.description}
                                   inputThree={equip.unit}
                                   inputFour={equip.cost}
+                                  handleEdit={(info, evt) =>
+                                    editEquipInfo(info, group.id, equip.id)
+                                  }
                                 />
                               );
                             })}

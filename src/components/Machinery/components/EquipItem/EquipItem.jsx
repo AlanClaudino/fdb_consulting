@@ -54,6 +54,7 @@ const EquipItem = ({inputOne, inputTwo, inputThree, inputFour, handleEdit}) => {
     };
 
     handleEdit(info, evt);
+    setIsEditing(false);
   };
 
   return (

@@ -17,12 +17,23 @@ import {
   Input,
   ItemContainer,
 } from "./styled";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {Text} from "../../../styled/styled";
 
 const GroupItem = ({isOpen, handleClick, value, handleForm, id}) => {
   const [isEditing, setIsEditing] = useState();
-  const [inputValue, setInputValue] = useState(value);
+  const [inputValue, setInputValue] = useState("");
+
+  useEffect(() => {
+    if (value) {
+      setInputValue(value);
+    }
+  }, []);
+
+  const handleEdit = () => {
+    setIsEditing(!isEditing);
+    setInputValue(value);
+  };
 
   const handleChange = (e) => {
     setInputValue(e.target.value);
@@ -30,8 +41,9 @@ const GroupItem = ({isOpen, handleClick, value, handleForm, id}) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    console.log("Handle Submit", inputValue);
     handleForm(inputValue);
+    setIsEditing(false);
   };
 
   return (
@@ -54,7 +66,7 @@ const GroupItem = ({isOpen, handleClick, value, handleForm, id}) => {
           <FormContainer onSubmit={handleSubmit}>
             <FormSection style={{gap: "10px"}}>
               <Input value={inputValue} onChange={handleChange} />
-              <EditButton>
+              <EditButton type="submit">
                 <CheckIcon size={18} />
               </EditButton>
             </FormSection>
@@ -64,7 +76,7 @@ const GroupItem = ({isOpen, handleClick, value, handleForm, id}) => {
         )}
       </ItemContainer>
       <ItemContainer style={{justifyContent: "center"}}>
-        <EditButton onClick={() => setIsEditing(!isEditing)}>
+        <EditButton onClick={handleEdit}>
           <Edit2Icon size={18} />
         </EditButton>
         <DeleteButton>
