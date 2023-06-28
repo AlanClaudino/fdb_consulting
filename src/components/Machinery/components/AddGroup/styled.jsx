@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const FormContainer = styled.form`
   display: flex;
   align-items: center;
-  gap: 70px;
+  gap: 30px;
   flex-wrap: wrap;
 `;
 
@@ -48,22 +48,26 @@ export const AddButton = styled.button`
   align-items: center;
   justify-content: center;
   gap: 5px;
-  background-color: #01ae57;
-  min-width: 120px;
+  background-color: rgb(15, 54, 60);
+  min-width: 90px;
   color: white;
   border-radius: 5px;
   font-size: 16px;
   padding: 7px 10px;
   border: none;
   &:hover {
-    background-color: #00cc66;
+    background-color: rgb(30, 69, 80);
     cursor: pointer;
   }
 `;
 
 export const ClearButton = styled("button")`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
   background-color: #d12b25;
-  min-width: 120px;
+  min-width: 90px;
   color: white;
   border-radius: 5px;
   font-size: 16px;

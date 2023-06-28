@@ -3,9 +3,12 @@ import {useDbContext} from "../../context/dbContext";
 import {Text, Title} from "../styled/styled";
 import AddGroup from "./components/AddGroup/AddGroup";
 import {
+  AddButton,
+  ClearButton,
   EquipContainer,
   ErrorMessage,
   GroupTitle,
+  ItemContainer,
   MachineryContainer,
   NewGroupContainer,
 } from "./styled";
@@ -15,13 +18,15 @@ import AddEquip from "./components/AddEquip/AddEquip";
 import EquipItem from "./components/EquipItem/EquipItem";
 
 const MachineryView = () => {
-  const {createEquipGroup, getFarmEquipments, farmEquip} = useDbContext();
+  const {createEquipGroup, getFarmEquipments, farmEquip, updateEquipGroup} =
+    useDbContext();
 
   const [farmEquipmentes, setFarmEquipmentes] = useState([]);
+  const [edited, setEdited] = useState([]);
 
   const [isLoading, setIsLoading] = useState(true);
-
   const [groupIsLoading, setGroupIsLoading] = useState(false);
+
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -81,6 +86,11 @@ const MachineryView = () => {
       return group;
     });
 
+    if (!edited.includes(id)) {
+      const newEdit = [...edited, id];
+      setEdited(newEdit);
+    }
+
     setFarmEquipmentes(data);
   };
 
@@ -98,8 +108,6 @@ const MachineryView = () => {
   };
 
   const editGroupDesc = (value, id) => {
-    console.log(value);
-    console.log(id);
     const data = farmEquipmentes.map((group) => {
       if (group.id === id) {
         const newGroup = {...group, description: value};
@@ -107,6 +115,11 @@ const MachineryView = () => {
       }
       return group;
     });
+
+    if (!edited.includes(id)) {
+      const newEdit = [...edited, id];
+      setEdited(newEdit);
+    }
 
     setFarmEquipmentes(data);
   };
@@ -126,10 +139,31 @@ const MachineryView = () => {
         const newGroup = {...group, equipment: editEquip};
         return newGroup;
       }
+
       return group;
     });
 
+    if (!edited.includes(equipId)) {
+      const newEdit = [...edited, equipId];
+      setEdited(newEdit);
+    }
     setFarmEquipmentes(data);
+  };
+
+  const handleSave = async () => {
+    try {
+      farmEquipmentes.forEach((group) => {
+        if (edited.includes(group.id)) {
+          // eslint-disable-next-line no-unused-vars
+          const {isOpen, id, ...groupInfo} = group;
+          updateEquipGroup(groupInfo, group.id);
+        }
+      });
+      setEdited([]);
+    } catch (error) {
+      console.log(error);
+      setError("Unable to save changes. Please, try again.");
+    }
   };
 
   return (
@@ -198,7 +232,7 @@ const MachineryView = () => {
                                   inputTwo={equip.description}
                                   inputThree={equip.unit}
                                   inputFour={equip.cost}
-                                  handleEdit={(info, evt) =>
+                                  handleEdit={(info) =>
                                     editEquipInfo(info, group.id, equip.id)
                                   }
                                 />
@@ -225,6 +259,10 @@ const MachineryView = () => {
               </>
             )}
           </EquipContainer>
+          <ItemContainer>
+            <AddButton onClick={handleSave}>Save</AddButton>
+            <ClearButton>Cancel</ClearButton>
+          </ItemContainer>
         </MachineryContainer>
       )}
     </>

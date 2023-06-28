@@ -155,13 +155,17 @@ const DatabaseContext = ({children}) => {
   const updateEquipGroup = async (equipGroupInfo, id) => {
     const GroupDocRef = doc(db, "Farms", farm?.id, "equipments", id);
     console.log("UPDATED");
-    try {
-      await updateDoc(GroupDocRef, equipGroupInfo);
-      return "Machinery and Equipments successfully updated.";
-    } catch (error) {
-      console.log(error);
-      return error;
-    }
+
+    await updateDoc(GroupDocRef, equipGroupInfo);
+    return "Machinery and Equipments successfully updated.";
+
+    // try {
+    //   await updateDoc(GroupDocRef, equipGroupInfo);
+    //   return "Machinery and Equipments successfully updated.";
+    // } catch (error) {
+    //   console.log(error);
+    //   return error;
+    // }
   };
 
   const getFarmEquipments = async () => {
