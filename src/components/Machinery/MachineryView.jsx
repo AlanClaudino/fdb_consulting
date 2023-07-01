@@ -1,33 +1,52 @@
 import {useEffect, useState} from "react";
 import {useDbContext} from "../../context/dbContext";
-import {Text, Title} from "../styled/styled";
+import {StyledLink, Text, Title} from "../styled/styled";
 import AddGroup from "./components/AddGroup/AddGroup";
 import {
   AddButton,
   ClearButton,
+  CloseButton,
+  ConfirmContainer,
   EquipContainer,
   ErrorMessage,
   GroupTitle,
   ItemContainer,
   MachineryContainer,
   NewGroupContainer,
+  Overlay,
+  SuccessMessage,
+  SaveButton,
 } from "./styled";
 import GroupItem from "./components/GroupItem/GroupItem";
 import loading from "../../assets/loading.gif";
 import AddEquip from "./components/AddEquip/AddEquip";
 import EquipItem from "./components/EquipItem/EquipItem";
+import {XSquareIcon} from "lucide-react";
+import {useNavigate} from "react-router-dom";
 
 const MachineryView = () => {
-  const {createEquipGroup, getFarmEquipments, farmEquip, updateEquipGroup} =
-    useDbContext();
+  const {
+    createEquipGroup,
+    getFarmEquipments,
+    farmEquip,
+    updateEquipGroup,
+    deleteEquipmentGroup,
+  } = useDbContext();
+
+  const navigate = useNavigate();
 
   const [farmEquipmentes, setFarmEquipmentes] = useState([]);
   const [edited, setEdited] = useState([]);
 
   const [isLoading, setIsLoading] = useState(true);
   const [groupIsLoading, setGroupIsLoading] = useState(false);
+  const [confirmView, setConfirmView] = useState(false);
+  const [leavePage, setLeavePage] = useState(false);
+  const [confirmDelete, setConfirmDelete] = useState(false);
+  const [deleteId, setDeleteId] = useState();
 
   const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     const getEquip = async () => {
@@ -143,11 +162,46 @@ const MachineryView = () => {
       return group;
     });
 
+    if (!edited.includes(id)) {
+      const newEdit = [...edited, id];
+      setEdited(newEdit);
+    }
+    setFarmEquipmentes(data);
+  };
+
+  const handleEquipDelete = (id, equipId) => {
+    const data = farmEquipmentes.map((group) => {
+      if (group.id === id) {
+        const editEquip = group.equipment.filter(
+          (equip) => equip.id != equipId
+        );
+        const newGroup = {...group, equipment: editEquip};
+        return newGroup;
+      }
+      return group;
+    });
+
     if (!edited.includes(equipId)) {
       const newEdit = [...edited, equipId];
       setEdited(newEdit);
     }
     setFarmEquipmentes(data);
+  };
+
+  const handleDelete = async (id) => {
+    setDeleteId(id);
+    setConfirmView(true);
+    setConfirmDelete(true);
+  };
+
+  const handleConfirmDelete = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    await deleteEquipmentGroup(deleteId);
+    setIsLoading(false);
+    setConfirmView(false);
+    setConfirmDelete(false);
+    setLeavePage(false);
   };
 
   const handleSave = async () => {
@@ -160,10 +214,27 @@ const MachineryView = () => {
         }
       });
       setEdited([]);
+      setMessage("Changes saved successfully. Click here to return to");
     } catch (error) {
       console.log(error);
       setError("Unable to save changes. Please, try again.");
     }
+  };
+
+  const handleLeave = () => {
+    navigate("/farm");
+  };
+
+  const handleCancel = () => {
+    if (edited.length == 0) navigate("/farm");
+    setConfirmView(true);
+    setLeavePage(true);
+  };
+
+  const handleCancelModal = () => {
+    setConfirmView(false);
+    setConfirmDelete(false);
+    setLeavePage(false);
   };
 
   return (
@@ -182,7 +253,24 @@ const MachineryView = () => {
       ) : (
         <MachineryContainer>
           <Title style={{alignSelf: "start"}}>Machinery & Equipments</Title>
-          {error && <ErrorMessage>{error}</ErrorMessage>}
+          {error && (
+            <ErrorMessage>
+              {error}
+              <CloseButton onClick={() => setError("")}>
+                <XSquareIcon />
+              </CloseButton>
+            </ErrorMessage>
+          )}
+          {message && (
+            <SuccessMessage>
+              <span>
+                {message} <StyledLink to={"/farm"}>Dashboard.</StyledLink>
+              </span>
+              <CloseButton onClick={() => setMessage("")}>
+                <XSquareIcon />
+              </CloseButton>
+            </SuccessMessage>
+          )}
           <NewGroupContainer>
             <Text>Register new Machinery & Equipment Group</Text>
             <AddGroup handleForm={handleNewGroup} />
@@ -221,6 +309,7 @@ const MachineryView = () => {
                           }
                           id={group.id}
                           handleForm={(info) => editGroupDesc(info, group.id)}
+                          handleGroupDelete={() => handleDelete(group.id)}
                         />
                         {group.isOpen && (
                           <>
@@ -234,6 +323,9 @@ const MachineryView = () => {
                                   inputFour={equip.cost}
                                   handleEdit={(info) =>
                                     editEquipInfo(info, group.id, equip.id)
+                                  }
+                                  handleEquipDelete={() =>
+                                    handleEquipDelete(group.id, equip.id)
                                   }
                                 />
                               );
@@ -261,9 +353,41 @@ const MachineryView = () => {
           </EquipContainer>
           <ItemContainer>
             <AddButton onClick={handleSave}>Save</AddButton>
-            <ClearButton>Cancel</ClearButton>
+            <ClearButton onClick={handleCancel}>Cancel</ClearButton>
           </ItemContainer>
         </MachineryContainer>
+      )}
+      {confirmView && (
+        <Overlay>
+          <ConfirmContainer>
+            {leavePage && (
+              <>
+                <Text style={{lineHeight: "1.5"}}>
+                  Your changes have not been saved and will be lost. Do you want
+                  to leave this page?
+                </Text>
+                <ItemContainer>
+                  <SaveButton onClick={() => handleLeave()}>Leave</SaveButton>
+                  <ClearButton onClick={handleCancelModal}>Cancel</ClearButton>
+                </ItemContainer>
+              </>
+            )}
+            {confirmDelete && (
+              <>
+                <Text style={{lineHeight: "1.5"}}>
+                  This group will be permanently delete and can not be
+                  recovered. Do you want to delete it?
+                </Text>
+                <ItemContainer>
+                  <SaveButton onClick={handleConfirmDelete}>
+                    Confirm Delete
+                  </SaveButton>
+                  <ClearButton onClick={handleCancelModal}>Cancel</ClearButton>
+                </ItemContainer>
+              </>
+            )}
+          </ConfirmContainer>
+        </Overlay>
       )}
     </>
   );

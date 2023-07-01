@@ -219,13 +219,13 @@ const EditWorkflowView = () => {
           )}
           {message && (
             <SuccessMessage>
-              <div style={{lineHeight: "1.5"}}>
+              <span style={{lineHeight: "1.5"}}>
                 {message} Click here to return to{" "}
                 <StyledLink to={"/farm/workflow"}>
                   Workflow Dashboard
                 </StyledLink>
                 .
-              </div>
+              </span>
               <CloseButton onClick={() => setMessage("")}>
                 <XSquareIcon />
               </CloseButton>

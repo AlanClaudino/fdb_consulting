@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import {CheckIcon, Edit2Icon, Trash2} from "lucide-react";
 import {
   CategoryText,
@@ -13,8 +14,14 @@ import {
 } from "./styled";
 import {useEffect, useState} from "react";
 
-// eslint-disable-next-line react/prop-types
-const EquipItem = ({inputOne, inputTwo, inputThree, inputFour, handleEdit}) => {
+const EquipItem = ({
+  inputOne,
+  inputTwo,
+  inputThree,
+  inputFour,
+  handleEdit,
+  handleEquipDelete,
+}) => {
   const [isEditing, setIsEditing] = useState(false);
 
   const [valueOne, setValueOne] = useState("");
@@ -57,6 +64,10 @@ const EquipItem = ({inputOne, inputTwo, inputThree, inputFour, handleEdit}) => {
     setIsEditing(false);
   };
 
+  const handleDelete = (e) => {
+    e.preventDefault();
+    handleEquipDelete();
+  };
   return (
     <EquipContainer>
       <ItemContainer style={{paddingLeft: "26px"}}>
@@ -96,7 +107,7 @@ const EquipItem = ({inputOne, inputTwo, inputThree, inputFour, handleEdit}) => {
         <EditButton onClick={() => setIsEditing(!isEditing)}>
           <Edit2Icon size={18} />
         </EditButton>
-        <DeleteButton>
+        <DeleteButton onClick={handleDelete}>
           <Trash2 size={18} />
         </DeleteButton>
       </ItemContainer>

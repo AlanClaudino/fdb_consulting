@@ -20,7 +20,14 @@ import {
 import {useEffect, useState} from "react";
 import {Text} from "../../../styled/styled";
 
-const GroupItem = ({isOpen, handleClick, value, handleForm, id}) => {
+const GroupItem = ({
+  isOpen,
+  handleClick,
+  value,
+  handleForm,
+  id,
+  handleGroupDelete,
+}) => {
   const [isEditing, setIsEditing] = useState();
   const [inputValue, setInputValue] = useState("");
 
@@ -44,6 +51,11 @@ const GroupItem = ({isOpen, handleClick, value, handleForm, id}) => {
     console.log("Handle Submit", inputValue);
     handleForm(inputValue);
     setIsEditing(false);
+  };
+
+  const handleDelete = (e) => {
+    e.preventDefault();
+    handleGroupDelete();
   };
 
   return (
@@ -79,7 +91,7 @@ const GroupItem = ({isOpen, handleClick, value, handleForm, id}) => {
         <EditButton onClick={handleEdit}>
           <Edit2Icon size={18} />
         </EditButton>
-        <DeleteButton>
+        <DeleteButton onClick={handleDelete}>
           <Trash2 size={18} />
         </DeleteButton>
       </ItemContainer>

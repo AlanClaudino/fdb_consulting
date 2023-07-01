@@ -156,6 +156,21 @@ export const DeleteButton = styled.button`
   }
 `;
 
+export const SaveButton = styled("button")`
+  background-color: #01ae57;
+  min-width: 120px;
+  color: white;
+  font-weight: bolder;
+  border-radius: 5px;
+  font-size: 16px;
+  padding: 7px 10px;
+  border: none;
+  &:hover {
+    background-color: #00cc66;
+    cursor: pointer;
+  }
+`;
+
 export const ClearButton = styled("button")`
   background-color: #d12b25;
   min-width: 120px;
@@ -178,4 +193,57 @@ export const GroupTitle = styled.section`
   padding: 15px;
   border-top-right-radius: 5px;
   border-top-left-radius: 5px;
+`;
+
+export const SuccessMessage = styled("p")`
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  width: fit-content;
+  gap: 25px;
+  max-width: 800px;
+  font-size: 16px;
+  font-family: "Lato", sans-serif;
+  padding: 10px;
+  border-left: 10px solid #01ae57;
+  background-color: rgb(250, 250, 250);
+  color: #0d2329;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+`;
+
+export const CloseButton = styled.button`
+  color: #0d2329;
+  margin: none;
+  padding: none;
+  background-color: inherit;
+  border: none;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+export const Overlay = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: rgba(13, 45, 51, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const ConfirmContainer = styled.div`
+  flex-grow: 1;
+  display: flex;
+  gap: 15px;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 20px;
+  background-color: #fafafa;
+  max-width: 500px;
+  padding: 30px;
 `;

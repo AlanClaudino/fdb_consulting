@@ -158,14 +158,6 @@ const DatabaseContext = ({children}) => {
 
     await updateDoc(GroupDocRef, equipGroupInfo);
     return "Machinery and Equipments successfully updated.";
-
-    // try {
-    //   await updateDoc(GroupDocRef, equipGroupInfo);
-    //   return "Machinery and Equipments successfully updated.";
-    // } catch (error) {
-    //   console.log(error);
-    //   return error;
-    // }
   };
 
   const getFarmEquipments = async () => {
@@ -190,6 +182,18 @@ const DatabaseContext = ({children}) => {
     }
   };
 
+  const deleteEquipmentGroup = async (equipGroupId) => {
+    const workflowDocRef = doc(
+      db,
+      "Farms",
+      farm?.id,
+      "equipments",
+      equipGroupId
+    );
+    await deleteDoc(workflowDocRef);
+    await getFarmEquipments();
+  };
+
   return (
     <dbContext.Provider
       value={{
@@ -209,6 +213,7 @@ const DatabaseContext = ({children}) => {
         createEquipGroup,
         getFarmEquipments,
         updateEquipGroup,
+        deleteEquipmentGroup,
       }}
     >
       {children}
