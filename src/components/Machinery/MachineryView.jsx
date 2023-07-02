@@ -181,8 +181,8 @@ const MachineryView = () => {
       return group;
     });
 
-    if (!edited.includes(equipId)) {
-      const newEdit = [...edited, equipId];
+    if (!edited.includes(id)) {
+      const newEdit = [...edited, id];
       setEdited(newEdit);
     }
     setFarmEquipmentes(data);

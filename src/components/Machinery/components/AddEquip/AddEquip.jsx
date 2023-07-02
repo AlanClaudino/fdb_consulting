@@ -17,7 +17,7 @@ const AddEquip = ({inputOne, handleForm}) => {
   const [valueOne, setValueOne] = useState("");
   const [valueTwo, setValueTwo] = useState("");
   const [valueThree, setValueThree] = useState("");
-  const [valueFour, setValueFour] = useState("");
+  const [valueFour, setValueFour] = useState("0.00");
 
   useEffect(() => {
     inputOne && setValueOne(inputOne);
@@ -34,7 +34,22 @@ const AddEquip = ({inputOne, handleForm}) => {
     setValueThree(e.target.value);
   };
   const inputFourChange = (e) => {
-    setValueFour(e.target.value);
+    const value = e.target.value.replace(/\D/g, "");
+
+    const decimalPlace = value.length - 2;
+
+    const newValue = `${value.slice(0, decimalPlace)}.${value.slice(
+      decimalPlace
+    )}`;
+
+    const finalValue = new Intl.NumberFormat("pt-br", {
+      style: "currency",
+      currency: "USD",
+      maximumFractionDigits: 2,
+      minimumFractionDigits: 2,
+    }).format(newValue);
+
+    setValueFour(finalValue);
   };
 
   const handleSubmit = (evt) => {
@@ -92,7 +107,7 @@ const AddEquip = ({inputOne, handleForm}) => {
           <FormSection>
             <Label>Cost</Label>
             <Input
-              type="number"
+              type="text"
               value={valueFour}
               onChange={inputFourChange}
               width={"100px"}

@@ -47,7 +47,22 @@ const EquipItem = ({
     setValueThree(e.target.value);
   };
   const inputFourChange = (e) => {
-    setValueFour(e.target.value);
+    const value = e.target.value.replace(/\D/g, "");
+
+    const decimalPlace = value.length - 2;
+
+    const newValue = `${value.slice(0, decimalPlace)}.${value.slice(
+      decimalPlace
+    )}`;
+
+    const finalValue = new Intl.NumberFormat("pt-br", {
+      style: "currency",
+      currency: "USD",
+      maximumFractionDigits: 2,
+      minimumFractionDigits: 2,
+    }).format(newValue);
+
+    setValueFour(finalValue);
   };
 
   const handleSubmit = (evt) => {
