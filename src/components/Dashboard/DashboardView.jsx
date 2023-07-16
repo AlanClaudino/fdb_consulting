@@ -59,7 +59,7 @@ const DashboardView = () => {
                 </IconWrapper>
                 <SubTitle>Machinery</SubTitle>
               </DashboardOptions>
-              <DashboardOptions>
+              <DashboardOptions onClick={() => navigate("inventory")}>
                 <IconWrapper background="#db3a34">
                   <InventoryIcon />
                 </IconWrapper>

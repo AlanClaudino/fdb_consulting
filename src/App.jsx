@@ -13,6 +13,7 @@ import RegisterFarm from "./routes/RegisterFarm";
 import Workflow from "./routes/Workflow";
 import EditWorkflow from "./routes/EditWorkflow";
 import Machinery from "./routes/machinery";
+import Inventoy from "./routes/Inventoy";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
               <Route path="workflow" element={<Workflow />} />
               <Route path="edit-workflow" element={<EditWorkflow />} />
               <Route path="machinery" element={<Machinery />} />
+              <Route path="inventory" element={<Inventoy />} />
             </Route>
           </Route>
         </Route>

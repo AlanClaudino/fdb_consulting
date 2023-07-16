@@ -25,6 +25,7 @@ const DatabaseContext = ({children}) => {
   const [farmWorkflows, setFarmWorkflows] = useState();
   const [workflow, setWorkflow] = useState();
   const [farmEquip, setFarmEquip] = useState();
+  const [farmInventory, setFarmInventory] = useState();
 
   const farmsCollectionRef = collection(db, "Farms");
 
@@ -57,6 +58,7 @@ const DatabaseContext = ({children}) => {
     setFarmWorkflows(null);
     setWorkflow(null);
     setFarmEquip(null);
+    setFarmInventory(null);
   };
 
   const createFarm = async (farmInfo) => {
@@ -194,6 +196,54 @@ const DatabaseContext = ({children}) => {
     await getFarmEquipments();
   };
 
+  const createInventoryGroup = async (info) => {
+    const inventoryGroupSubcollectionRef = collection(
+      db,
+      "Farms",
+      farm?.id,
+      "inventory"
+    );
+    await addDoc(inventoryGroupSubcollectionRef, info);
+    await getFarmInventory();
+  };
+
+  const updateInventoryGroup = async (inventoryGroupInfo, id) => {
+    const GroupDocRef = doc(db, "Farms", farm?.id, "inventory", id);
+
+    await updateDoc(GroupDocRef, inventoryGroupInfo);
+    return "Inventory successfully updated.";
+  };
+
+  const getFarmInventory = async () => {
+    const inventoryGroup = [];
+    const inventoryGroupSubcollectionRef = collection(
+      db,
+      "Farms",
+      farm?.id,
+      "inventory"
+    );
+    const inventoryDocs = await getDocs(inventoryGroupSubcollectionRef);
+
+    inventoryDocs.forEach((doc) => {
+      const inventory = {id: doc.id, ...doc.data()};
+      inventoryGroup.push(inventory);
+    });
+
+    setFarmInventory(inventoryGroup);
+  };
+
+  const deleteInventoryGroup = async (inventoryGroupId) => {
+    const inventoryDocRef = doc(
+      db,
+      "Farms",
+      farm?.id,
+      "inventory",
+      inventoryGroupId
+    );
+    await deleteDoc(inventoryDocRef);
+    await getFarmInventory();
+  };
+
   return (
     <dbContext.Provider
       value={{
@@ -202,6 +252,7 @@ const DatabaseContext = ({children}) => {
         workflow,
         farmWorkflows,
         farmEquip,
+        farmInventory,
         createFarm,
         getUserFarms,
         getSelectedFarm,
@@ -214,6 +265,10 @@ const DatabaseContext = ({children}) => {
         getFarmEquipments,
         updateEquipGroup,
         deleteEquipmentGroup,
+        createInventoryGroup,
+        getFarmInventory,
+        updateInventoryGroup,
+        deleteInventoryGroup,
       }}
     >
       {children}
