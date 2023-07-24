@@ -18,7 +18,7 @@ import {
   TableTitle,
   WorflowContainer,
 } from "./styled";
-import {ErrorMessage, SubTitle, Text, Title} from "../styled/styled";
+import {ErrorMessage, SubTitle, Text, Title} from "../styledold/styled";
 import {Edit2Icon, PlusIcon, Trash2} from "lucide-react";
 import {useDbContext} from "../../context/dbContext";
 import {useEffect, useState} from "react";

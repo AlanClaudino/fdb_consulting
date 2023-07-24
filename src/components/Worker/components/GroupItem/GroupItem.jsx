@@ -18,7 +18,7 @@ import {
   ItemContainer,
 } from "./styled";
 import {useEffect, useState} from "react";
-import {Text} from "../../../styled/styled";
+import {Text} from "../../../styledold/styled";
 
 const GroupItem = ({
   isOpen,

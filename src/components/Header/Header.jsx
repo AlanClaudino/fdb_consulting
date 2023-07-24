@@ -1,4 +1,4 @@
-import {ErrorMessage, Text} from "../styled/styled";
+import {ErrorMessage, Text} from "../styledold/styled";
 import {UserMenu, StyledHeader, MenuButton, UserIcon, LogoText} from "./styled";
 import logo from "../../assets/LogoDark.png";
 import {useEffect, useRef, useState} from "react";

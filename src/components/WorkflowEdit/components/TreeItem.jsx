@@ -16,7 +16,7 @@ import {
   MinusSquareIcon,
   Trash2,
 } from "lucide-react";
-import {Text} from "../../styled/styled";
+import {Text} from "../../styledold/styled";
 import {DeleteButton, EditButton} from "../../Workflow/styled";
 import {useState} from "react";
 

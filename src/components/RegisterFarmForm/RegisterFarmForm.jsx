@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import {ErrorMessage} from "../styled/styled";
+import {ErrorMessage} from "../styledold/styled";
 import {
   Background,
   ClearButton,

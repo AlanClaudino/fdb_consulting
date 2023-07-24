@@ -7,7 +7,7 @@ import {
   ErrorMessage,
   ModalSuccess,
   Text,
-} from "../components/styled/styled";
+} from "../components/styledold/styled";
 import {useAuthContext} from "../context/AuthContext";
 
 const Profile = () => {

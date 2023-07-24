@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import {DarkButton, Input, Text} from "../styled/styled";
+import {DarkButton, Input, Text} from "../styledold/styled";
 import {FormSection, RadioContainer, RadioInput} from "./styled";
 
 import farm1 from "../../assets/farmer1.jpg";

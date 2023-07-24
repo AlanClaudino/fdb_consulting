@@ -1,5 +1,5 @@
 import {XSquareIcon} from "lucide-react";
-import {SubTitle, Text, Title} from "../styled/styled";
+import {SubTitle, Text, Title} from "../styledold/styled";
 import {
   ErrorMessage,
   ActivitiesContainer,

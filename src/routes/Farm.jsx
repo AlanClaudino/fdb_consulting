@@ -1,6 +1,6 @@
 import {Navigate, Outlet, useNavigate} from "react-router-dom";
 import Sidebar from "../components/Sidebar/Sidebar.jsx";
-import {RowContainer} from "../components/styled/styled.jsx";
+import {RowContainer} from "../components/styledold/styled.jsx";
 import {useDbContext} from "../context/dbContext.jsx";
 import {useEffect} from "react";
 import {useState} from "react";

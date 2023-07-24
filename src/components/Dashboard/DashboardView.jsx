@@ -1,7 +1,7 @@
 import {useState, useEffect} from "react";
 import loading from "../../assets/loading.gif";
 import {useNavigate} from "react-router-dom";
-import {SubTitle, Text, Title} from "../styled/styled";
+import {SubTitle, Text, Title} from "../styledold/styled";
 import {
   DashContainer,
   DashboardOptions,

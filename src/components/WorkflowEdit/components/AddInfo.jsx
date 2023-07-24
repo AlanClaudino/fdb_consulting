@@ -12,7 +12,7 @@ import {
   Input,
   InfoContainer,
 } from "../styled";
-import {Text} from "../../styled/styled";
+import {Text} from "../../styledold/styled";
 import {useEffect, useState} from "react";
 
 const AddInfo = ({

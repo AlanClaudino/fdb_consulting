@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {useDbContext} from "../../context/dbContext";
-import {StyledLink, Text, Title} from "../styled/styled";
+import {StyledLink, Text, Title} from "../styledold/styled";
 import {
   AddButton,
   ClearButton,

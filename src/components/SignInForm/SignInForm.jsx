@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import logo from "../../assets/Cut-Logo.png";
-import {DarkButton, ErrorMessage, StyledLink} from "../styled/styled";
+import {DarkButton, ErrorMessage, StyledLink} from "../styledold/styled";
 import {
   ColumnContainer,
   Form,

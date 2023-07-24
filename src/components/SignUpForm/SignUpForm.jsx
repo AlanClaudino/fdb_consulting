@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import {DarkButton, StyledLink, ErrorMessage} from "../styled/styled";
+import {DarkButton, StyledLink, ErrorMessage} from "../styledold/styled";
 
 import {
   ColumnContainer,
