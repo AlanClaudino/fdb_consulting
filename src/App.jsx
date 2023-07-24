@@ -12,7 +12,7 @@ import Project from "./routes/Project";
 import RegisterFarm from "./routes/RegisterFarm";
 import Workflow from "./routes/Workflow";
 import EditWorkflow from "./routes/EditWorkflow";
-import Machinery from "./routes/machinery";
+import Machinery from "./routes/Machinery";
 import Inventoy from "./routes/Inventoy";
 import Worker from "./routes/Worker";
 
