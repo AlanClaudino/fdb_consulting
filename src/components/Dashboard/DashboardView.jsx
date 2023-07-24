@@ -65,7 +65,7 @@ const DashboardView = () => {
                 </IconWrapper>
                 <SubTitle>Inventory</SubTitle>
               </DashboardOptions>
-              <DashboardOptions>
+              <DashboardOptions onClick={() => navigate("workers")}>
                 <IconWrapper background="#65AFFF">
                   <WorkersIcon />
                 </IconWrapper>

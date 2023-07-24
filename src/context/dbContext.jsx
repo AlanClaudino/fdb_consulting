@@ -26,6 +26,7 @@ const DatabaseContext = ({children}) => {
   const [workflow, setWorkflow] = useState();
   const [farmEquip, setFarmEquip] = useState();
   const [farmInventory, setFarmInventory] = useState();
+  const [farmWorkers, setFarmWorkers] = useState();
 
   const farmsCollectionRef = collection(db, "Farms");
 
@@ -159,6 +160,7 @@ const DatabaseContext = ({children}) => {
     console.log("UPDATED");
 
     await updateDoc(GroupDocRef, equipGroupInfo);
+    await getFarmEquipments();
     return "Machinery and Equipments successfully updated.";
   };
 
@@ -211,6 +213,7 @@ const DatabaseContext = ({children}) => {
     const GroupDocRef = doc(db, "Farms", farm?.id, "inventory", id);
 
     await updateDoc(GroupDocRef, inventoryGroupInfo);
+    await getFarmInventory();
     return "Inventory successfully updated.";
   };
 
@@ -244,6 +247,49 @@ const DatabaseContext = ({children}) => {
     await getFarmInventory();
   };
 
+  const createWorkersGroup = async (info) => {
+    const workersGroupSubcollectionRef = collection(
+      db,
+      "Farms",
+      farm?.id,
+      "workers"
+    );
+    await addDoc(workersGroupSubcollectionRef, info);
+    await getFarmWorkers();
+  };
+
+  const getFarmWorkers = async () => {
+    const workersGroup = [];
+    const workersGroupSubcollectionRef = collection(
+      db,
+      "Farms",
+      farm?.id,
+      "workers"
+    );
+    const workersDocs = await getDocs(workersGroupSubcollectionRef);
+
+    workersDocs.forEach((doc) => {
+      const workers = {id: doc.id, ...doc.data()};
+      workersGroup.push(workers);
+    });
+
+    setFarmWorkers(workersGroup);
+  };
+
+  const updateWorkersGroup = async (workersGroupInfo, id) => {
+    const GroupDocRef = doc(db, "Farms", farm?.id, "workers", id);
+
+    await updateDoc(GroupDocRef, workersGroupInfo);
+    await getFarmWorkers();
+    return "Workers successfully updated.";
+  };
+
+  const deleteWorkerGroup = async (workersGroupId) => {
+    const workersDocRef = doc(db, "Farms", farm?.id, "workers", workersGroupId);
+    await deleteDoc(workersDocRef);
+    await getFarmWorkers();
+  };
+
   return (
     <dbContext.Provider
       value={{
@@ -253,6 +299,7 @@ const DatabaseContext = ({children}) => {
         farmWorkflows,
         farmEquip,
         farmInventory,
+        farmWorkers,
         createFarm,
         getUserFarms,
         getSelectedFarm,
@@ -269,6 +316,10 @@ const DatabaseContext = ({children}) => {
         getFarmInventory,
         updateInventoryGroup,
         deleteInventoryGroup,
+        createWorkersGroup,
+        updateWorkersGroup,
+        deleteWorkerGroup,
+        getFarmWorkers,
       }}
     >
       {children}

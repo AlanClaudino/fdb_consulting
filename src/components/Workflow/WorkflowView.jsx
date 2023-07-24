@@ -69,53 +69,57 @@ const WorkflowView = ({
             </DarkButton>
           </section>
           <TableContainer>
-            <TableTitle>
-              <InnerSection>
-                <Text>Id</Text>
-              </InnerSection>
-              <InnerSection>
-                <Text>Crop</Text>
-              </InnerSection>
-              <InnerSection>
-                <Text>Description</Text>
-              </InnerSection>
-              <InnerSection>
-                <Text>Manage</Text>
-              </InnerSection>
-            </TableTitle>
-            {!farmWorkflows.length ? (
-              <TableRow>
-                <TableData style={{justifyContent: "center"}}>
-                  <Text>
-                    No workflows yet. Start building your budget creating one.
-                  </Text>
-                </TableData>
-              </TableRow>
-            ) : (
-              farmWorkflows.map((workflow) => {
-                return (
-                  <TableRow key={workflow.id}>
-                    <TableData>
-                      <Text>{workflow.id}</Text>
-                    </TableData>
-                    <TableData>
-                      <Text>{workflow.crop}</Text>
-                    </TableData>
-                    <TableData>
-                      <Text>{workflow.description}</Text>
-                    </TableData>
-                    <TableData>
-                      <EditButton onClick={() => handleEdit(workflow.id)}>
-                        <Edit2Icon size={18} />
-                      </EditButton>
-                      <DeleteButton onClick={() => handleDelete(workflow.id)}>
-                        <Trash2 size={18} />
-                      </DeleteButton>
-                    </TableData>
-                  </TableRow>
-                );
-              })
-            )}
+            <thead>
+              <TableTitle>
+                <InnerSection>
+                  <Text>Id</Text>
+                </InnerSection>
+                <InnerSection>
+                  <Text>Crop</Text>
+                </InnerSection>
+                <InnerSection>
+                  <Text>Description</Text>
+                </InnerSection>
+                <InnerSection>
+                  <Text>Manage</Text>
+                </InnerSection>
+              </TableTitle>
+            </thead>
+            <tbody>
+              {!farmWorkflows.length ? (
+                <TableRow>
+                  <TableData style={{justifyContent: "center"}}>
+                    <Text>
+                      No workflows yet. Start building your budget creating one.
+                    </Text>
+                  </TableData>
+                </TableRow>
+              ) : (
+                farmWorkflows.map((workflow) => {
+                  return (
+                    <TableRow key={workflow.id}>
+                      <TableData>
+                        <Text>{workflow.id}</Text>
+                      </TableData>
+                      <TableData>
+                        <Text>{workflow.crop}</Text>
+                      </TableData>
+                      <TableData>
+                        <Text>{workflow.description}</Text>
+                      </TableData>
+                      <TableData>
+                        <EditButton onClick={() => handleEdit(workflow.id)}>
+                          <Edit2Icon size={18} />
+                        </EditButton>
+                        <DeleteButton onClick={() => handleDelete(workflow.id)}>
+                          <Trash2 size={18} />
+                        </DeleteButton>
+                      </TableData>
+                    </TableRow>
+                  );
+                })
+              )}
+            </tbody>
           </TableContainer>
         </WorflowContainer>
       )}

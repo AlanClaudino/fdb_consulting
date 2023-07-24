@@ -14,6 +14,7 @@ import Workflow from "./routes/Workflow";
 import EditWorkflow from "./routes/EditWorkflow";
 import Machinery from "./routes/machinery";
 import Inventoy from "./routes/Inventoy";
+import Worker from "./routes/Worker";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
               <Route path="edit-workflow" element={<EditWorkflow />} />
               <Route path="machinery" element={<Machinery />} />
               <Route path="inventory" element={<Inventoy />} />
+              <Route path="workers" element={<Worker />} />
             </Route>
           </Route>
         </Route>

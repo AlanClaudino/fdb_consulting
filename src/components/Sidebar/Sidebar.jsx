@@ -60,7 +60,7 @@ const Sidebar = ({
         <SideInventoryIcon />
         <StyledSidebarText>Inventory</StyledSidebarText>
       </StyledSidebarItem>
-      <StyledSidebarItem>
+      <StyledSidebarItem onClick={() => navigate("/farm/workers")}>
         <SideWorkerIcon />
         <StyledSidebarText>Workers</StyledSidebarText>
       </StyledSidebarItem>
