@@ -11,7 +11,7 @@ export const ColumnContainer = styled("div")`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 30px;
+  gap: 20px;
   padding: 20px;
   justify-content: center;
   background-color: #f4f4f4;

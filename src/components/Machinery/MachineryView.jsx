@@ -343,7 +343,7 @@ const MachineryView = () => {
                     );
                   })
                 ) : (
-                  <Text>
+                  <Text style={{padding: "20px"}}>
                     No equipment registered yet. Add your first to start
                     building your budgets.
                   </Text>

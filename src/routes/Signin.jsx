@@ -26,6 +26,20 @@ const Signin = () => {
     }
   };
 
+  const demoLogin = async () => {
+    setError("");
+    const email = "teste@teste.com";
+    const password = import.meta.env.VITE_DEMO_PASS;
+
+    try {
+      await signin(email, password);
+      navigate("/");
+    } catch (err) {
+      console.log(err.message);
+      setError("Password or E-mail is invalid. Please, try again.");
+    }
+  };
+
   const style = {
     display: "flex",
     alignItems: "center",
@@ -41,6 +55,7 @@ const Signin = () => {
         emailRef={emailRef}
         passwordRef={passwordRef}
         error={error}
+        demoLogin={demoLogin}
       />
     </div>
   );

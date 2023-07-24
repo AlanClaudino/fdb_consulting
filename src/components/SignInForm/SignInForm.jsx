@@ -11,7 +11,13 @@ import {
   Title,
 } from "./styled";
 
-const SignInForm = ({handleSubmit, emailRef, passwordRef, error}) => {
+const SignInForm = ({
+  handleSubmit,
+  emailRef,
+  passwordRef,
+  error,
+  demoLogin,
+}) => {
   return (
     <RowContainer>
       <ColumnContainer>
@@ -27,6 +33,7 @@ const SignInForm = ({handleSubmit, emailRef, passwordRef, error}) => {
           />
           <DarkButton type="submit">Sign In</DarkButton>
         </Form>
+        <DarkButton onClick={demoLogin}>Demo</DarkButton>
 
         <LinksContainer>
           <LinkText>
