@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import background from "../../assets/farmBackground.svg";
+import background from "../../assets/Background.svg";
 
 export const Background = styled("div")`
   height: 100%;
